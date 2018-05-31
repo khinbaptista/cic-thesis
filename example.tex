@@ -1,14 +1,14 @@
 %==========================================
 %
 % SIBGRAPI 2018 paper
-% Example of IEEEtran.cls, adapted for SIBGRAPI 2018 
+% Example of IEEEtran.cls, adapted for SIBGRAPI 2018
 %
 %==========================================
 
 % *** Authors should verify (and, if needed, correct) their LaTeX system  ***
 % *** with the testflow diagnostic prior to trusting their LaTeX platform ***
 % *** with production work. The IEEE's font choices and paper sizes can   ***
-% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% *** trigger bugs that do not appear when using other class files.       ***
 % The testflow support page is at:
 % http://www.michaelshell.org/tex/testflow/
 
@@ -17,29 +17,6 @@
 
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
-
-
-% *** MISC UTILITY PACKAGES ***
-%
-%\usepackage{ifpdf}
-% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
-% compilation based on whether the output is pdf or dvi.
-% usage:
-% \ifpdf
-%   % pdf code
-% \else
-%   % dvi code
-% \fi
-% The latest version of ifpdf.sty can be obtained from:
-% http://www.ctan.org/pkg/ifpdf
-% Also, note that IEEEtran.cls V1.7 and later provides a builtin
-% \ifCLASSINFOpdf conditional that works the same way.
-% When switching from latex to pdflatex and vice-versa, the compiler may
-% have to be run twice to clear warning/error messages.
-
-
-
-
 
 
 % *** CITATION PACKAGES ***
@@ -59,11 +36,6 @@
 % The latest version can be obtained at:
 % http://www.ctan.org/pkg/cite
 % The documentation is contained in the cite.sty file itself.
-
-
-
-
-
 
 % *** GRAPHICS RELATED PACKAGES ***
 %
@@ -88,7 +60,7 @@
 % graphicx was written by David Carlisle and Sebastian Rahtz. It is
 % required if you want graphics, photos, etc. graphicx.sty is already
 % installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
+% can be obtained at:
 % http://www.ctan.org/pkg/graphicx
 % Another good source of documentation is "Using Imported Graphics in
 % LaTeX2e" by Keith Reckdahl which can be found at:
@@ -273,15 +245,15 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Example of IEEEtran.cls, adapted for SIBGRAPI 2018}
+\title{Building an interactive application for shader learning}
 
-%------------------------------------------------------------------------- 
-% change the % on next lines to produce the final camera-ready version 
+%-------------------------------------------------------------------------
+% change the % on next lines to produce the final camera-ready version
 \newif\iffinal
 %\finalfalse
 \finaltrue
 \newcommand{\jemsid}{99999}
-%------------------------------------------------------------------------- 
+%-------------------------------------------------------------------------
 
 % author names and affiliations
 % use a multiple column layout for up to two different
@@ -292,22 +264,18 @@
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Michael Shell}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org/contact.html}
-\and
-\IEEEauthorblockN{Homer Simpson}
-\IEEEauthorblockA{Twentieth Century Fox\\
-Springfield, USA\\
-Email: homer@thesimpsons.com}
-\and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678--2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212}}
+\author{
+	\IEEEauthorblockN{Khin Emmanuel Rodrigues Baptista}
+	\IEEEauthorblockA{Institute of Informatics\\
+	Federal University of Rio Grande do Sul\\
+	Porto Alegre - RS, Brazil\\
+	Email: khin.baptista@gmail.com}
+	\and
+	\IEEEauthorblockN{Homer Simpson}
+	\IEEEauthorblockA{Twentieth Century Fox\\
+	Springfield, USA\\
+	Email: homer@thesimpsons.com}
+}
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -316,10 +284,10 @@ Fax: (888) 555--1212}}
 
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
-% 
+%
 %\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
 %Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
+%James Kirk\IEEEauthorrefmark{3},
 %Montgomery Scott\IEEEauthorrefmark{3} and
 %Eldon Tyrell\IEEEauthorrefmark{4}}
 %\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
@@ -342,7 +310,21 @@ Fax: (888) 555--1212}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The abstract goes here.
+In order to learn shader programming, students often have to create the entire
+host application to manually load 3-dimensional meshes and images, and deal
+with specific graphic API details. This process can easily distract the
+student, deviating attention from the actual shader programming. There are
+tools to assist these tasks, such as NVidia's FX Composer - which has been
+discontinued since 2008 - and some online resources, like Shadertoy and Shdr,
+but those are often difficult to use, have a limited feature set, and/or lack
+documentation to get beginners started.
+
+In this work we built an easy-to-use desktop tool which provides the full
+environment required for shader programming from beginner to advanced, with a
+user-friendly interface which allows students to effortlessly load 3D models
+and images and modify variables and textures while the program is running,
+applying the changes in real time.
+
 \end{abstract}
 
 % no keywords
@@ -365,6 +347,103 @@ Subsection text here.
 \subsubsection{Subsubsection Heading Here}
 Subsubsection text here.
 
+\section{Architecture}
+In this work, the most important decision of the architecture was the choice of
+using Vulkan for the graphics API. Vulkan is a low-overhead, cross-platform 3D
+graphics and compute API created by the Khronos Group. Using Vulkan has been a
+learning process, and the architecture chosen for this work is a reflection of
+that learning process.
+
+For the purposes of this work, a Material is defined as a combination of a
+vertex shader and a fragment shader, along with their uniforms values. A Shader
+is the created from the source GLSL code provided by the user, which is then
+compiled into SPIR-V binary code and stored. In order to be able to preview the
+material, a Geometry object can be created: a geometri is a combination of
+vertex attributes (vertex position, normal, tangent and texture coordinates)
+which will be passed to the graphics pipeline.
+
+\subsection{Shader Module}
+A Shader object represents one stage of the programmable pipeline stages.
+In this work, it has a type, which indicate whether the shader is a vertex or a
+fragment shader. The type of the shader is inferred when a GLSL shader file is
+loaded based on the extension of the shader file, '.vert' for a vertex shader
+and '.frag' for a fragment shader.
+
+The module is also capable of compiling the GLSL source code into SPIR-V, an
+intermediate binary file format. The compilation is done using a third-party
+library, libshaderc, developed by Google. The SPIR-V code is then used to create
+the Vulkan shader module, an object used in the pipeline creation later.
+
+Shaders can define uniform objects containing various uniforms. The uniforms
+names are checked for specific names and, if their types match, their values are
+loaded automatically. This applies, for example, to a uniform of type "mat4"
+named "modelViewProjection". A similar process is adopted for vertex attributes,
+where their names and types are checked in order to load the correct values in
+the vertex buffer later on.
+
+Possible uniform names updated automatically are: "model", "view", "projection",
+"modelView", "modelViewProjection", their inverse counterparts with "Inverse" as
+suffix, "cameraMatrix" (which is the view and projection transformations
+combined) and "normalMatrix" (the inverse transposed 3x3 modelView submatrix).
+All the matrices must be of type "mat4", except the normal matrix, which must be
+a "mat3" matrix.
+
+Possible vertex attributes are: "position", "normal", "tangent" and "uv"
+(texture coordinates). The first three attributes may be either of type "vec3"
+or "vec4". Position vectors with four components will have W component equal to
+one; Normal vectors will have a W component equal to zero; Tangent vectors will
+have either 1 or -1 for its fourth component, indicating which side the binormal
+vector points to. Texture coordinates must be of type "vec2".
+
+Shaders can also define image samplers of type "sampler2D" and "samplerCube" in
+GLSL. These will be initialized in the material module with a default texture
+until the user selects a new one using the user interface.
+
+Uniforms objects and samplers must have different binding decoration numbers
+specified in GLSL using the layout qualifier.
+
+\subsection{Material Module}
+A Material is a combination of a vertex and a fragment shader, plus the values
+of the uniform variables defined in those shaders.
+
+The material module is responsible for parsing the shaders' SPIR-V codes and
+check uniform names. The code analysis is done using a third-party library,
+SPIRV-Cross, a tool and library for performing reflection on SPIR-V and
+disassembling SPIR-V back to high level languages. After the analysis, a
+description of the requested uniform data is created in order to allow the
+creation of the uniform buffer object later on. It also parses the image
+samplers and the attributes requested by the shader code.
+
+The material module also deals with many aspects of the Vulkan API, like
+creating a descriptor pool, a descriptor set layout, a pipeline layout and
+a pipeline object.
+
+\subsection{Geometry Module}
+Every geometry object has standard transformation parameters (translation,
+rotation and scale), and an assigned material.
+
+When a material is assigned, the parsed vertex attributes in the material are
+used to create a vertex buffer object, an index buffer object (only if the
+geometry has vertex indices data). The parsed uniform data description in the
+material is also used by the geometry module to create a uniform buffer object.
+
+This module also deals with Vulkan directly, allocating a descriptor set from
+the assigned material's descriptor pool and recording drawing commands in
+command buffers.
+
+\subsection{Texture Module}
+The texture module deals with Vulkan in order to pass image data for the
+shaders. This means creating Vulkan objects for an image, image view and
+sampler.
+
+Images are loaded by Godot Engine, the engine used to create the user interface.
+
+\subsection{Camera Module}
+A simple module to model a virtual camera. It has a position, target and up
+vector for reference and an angle for the field of view of the projection.
+
+
+
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -382,7 +461,7 @@ Subsubsection text here.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=2.5in]{figs/SIBGRAPI2018-banner.png}
-% where an .eps filename suffix will be assumed under latex, 
+% where an .eps filename suffix will be assumed under latex,
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
 \caption{SIBGRAPI - Conference on Graphics, Patterns and Images.}
@@ -398,7 +477,7 @@ Subsubsection text here.
 % The subfigure \label commands are set within each subfloat command,
 % and the \label for the overall figure must come after \caption.
 % \hfil is used as a separator to get equal spacing.
-% Watch out that the combined width of all the subfigures on a 
+% Watch out that the combined width of all the subfigures on a
 % line do not exceed the text width or a line break will occur.
 %
 \begin{figure*}[!t]
@@ -455,7 +534,7 @@ Three & Four\\
 % in-text middle ("here") positioning is typically not used, but it
 % is allowed and encouraged for Computer Society conferences (but
 % not Computer Society journals). Most IEEE journals/conferences use
-% top floats exclusively. 
+% top floats exclusively.
 % Note that, LaTeX2e, unlike IEEE journals/conferences, places
 % footnotes above bottom floats. This can be corrected via the
 % \fnbelowfloat command of the stfloats package.
@@ -517,5 +596,3 @@ The authors would like to thank...
 
 % that's all folks
 \end{document}
-
-
