@@ -1,39 +1,14 @@
 \subsection{Shader Module}
-A Shader object represents one stage of the programmable pipeline stages.
-In this work, it has a type, which indicate whether the shader is a vertex or a
-fragment shader. The type of the shader is inferred when a GLSL shader file is
-loaded based on the extension of the shader file, '.vert' for a vertex shader
-and '.frag' for a fragment shader.
+A Shader object represents one stage of the programmable pipeline stages. In this work, it has a type, which indicate whether the shader is a vertex or a fragment shader. The type of the shader is inferred when a GLSL shader file is loaded based on the extension of the shader file, '.vert' for a vertex shader and '.frag' for a fragment shader.
 
-The module is also capable of compiling the GLSL source code into SPIR-V, an
-intermediate binary file format. The compilation is done using a third-party
-library, libshaderc, developed by Google. The SPIR-V code is then used to create
-the Vulkan shader module, an object used in the pipeline creation later.
+The module is also capable of compiling the GLSL source code into SPIR-V, an intermediate binary file format. The compilation is done using a third-party library, libshaderc, developed by Google. The SPIR-V code is then used to create the Vulkan shader module, an object used in the pipeline creation later.
 
-Shaders can define uniform objects containing various uniforms. The uniforms
-names are checked for specific names and, if their types match, their values are
-loaded automatically. This applies, for example, to a uniform of type "mat4"
-named "modelViewProjection". A similar process is adopted for vertex attributes,
-where their names and types are checked in order to load the correct values in
-the vertex buffer later on.
+Shaders can define uniform objects containing various uniforms. The uniforms names are checked for specific names and, if their types match, their values are loaded automatically. This applies, for example, to a uniform of type "mat4" named "modelViewProjection". A similar process is adopted for vertex attributes, where their names and types are checked in order to load the correct values in the vertex buffer later on.
 
-Possible uniform names updated automatically are: "model", "view", "projection",
-"modelView", "modelViewProjection", their inverse counterparts with "Inverse" as
-suffix, "cameraMatrix" (which is the view and projection transformations
-combined) and "normalMatrix" (the inverse transposed 3x3 modelView submatrix).
-All the matrices must be of type "mat4", except the normal matrix, which must be
-a "mat3" matrix.
+Possible uniform names updated automatically are: "model", "view", "projection", "modelView", "modelViewProjection", their inverse counterparts with "Inverse" as suffix, "cameraMatrix" (which is the view and projection transformations combined) and "normalMatrix" (the inverse transposed 3x3 modelView submatrix). All the matrices must be of type "mat4", except the normal matrix, which must be a "mat3" matrix.
 
-Possible vertex attributes are: "position", "normal", "tangent" and "uv"
-(texture coordinates). The first three attributes may be either of type "vec3"
-or "vec4". Position vectors with four components will have W component equal to
-one; Normal vectors will have a W component equal to zero; Tangent vectors will
-have either 1 or -1 for its fourth component, indicating which side the binormal
-vector points to. Texture coordinates must be of type "vec2".
+Possible vertex attributes are: "position", "normal", "tangent" and "uv" (texture coordinates). The first three attributes may be either of type "vec3" or "vec4". Position vectors with four components will have W component equal to one; Normal vectors will have a W component equal to zero; Tangent vectors will have either 1 or -1 for its fourth component, indicating which side the binormal vector points to. Texture coordinates must be of type "vec2".
 
-Shaders can also define image samplers of type "sampler2D" and "samplerCube" in
-GLSL. These will be initialized in the material module with a default texture
-until the user selects a new one using the user interface.
+Shaders can also define image samplers of type "sampler2D" and "samplerCube" in GLSL. These will be initialized in the material module with a default texture until the user selects a new one using the user interface.
 
-Uniforms objects and samplers must have different binding decoration numbers
-specified in GLSL using the layout qualifier.
+Uniforms objects and samplers must have different binding decoration numbers specified in GLSL using the layout qualifier.

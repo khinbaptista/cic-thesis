@@ -1,15 +1,6 @@
 \subsection{Material Module}
-A Material is a combination of a vertex and a fragment shader, plus the values
-of the uniform variables defined in those shaders.
+A Material is a combination of a vertex and a fragment shader, plus the values of the uniform variables defined in those shaders.
 
-The material module is responsible for parsing the shaders' SPIR-V codes and
-check uniform names. The code analysis is done using a third-party library,
-SPIRV-Cross, a tool and library for performing reflection on SPIR-V and
-disassembling SPIR-V back to high level languages. After the analysis, a
-description of the requested uniform data is created in order to allow the
-creation of the uniform buffer object later on. It also parses the image
-samplers and the attributes requested by the shader code.
+The material module is responsible for parsing the shaders' SPIR-V codes and check uniform names. The code analysis is done using a third-party library, SPIRV-Cross, a tool and library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages. After the analysis, a description of the requested uniform data is created in order to allow the creation of the uniform buffer object later on. It also parses the image samplers and the attributes requested by the shader code.
 
-The material module also deals with many aspects of the Vulkan API, like
-creating a descriptor pool, a descriptor set layout, a pipeline layout and
-a pipeline object.
+The material module also deals with many aspects of the Vulkan API, like creating a descriptor pool, a descriptor set layout, a pipeline layout and a pipeline object.

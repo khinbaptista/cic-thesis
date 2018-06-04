@@ -1,12 +1,6 @@
 \subsection{Geometry Module}
-Every geometry object has standard transformation parameters (translation,
-rotation and scale), and an assigned material.
+Every geometry object has standard transformation parameters (translation, rotation and scale), and an assigned material.
 
-When a material is assigned, the parsed vertex attributes in the material are
-used to create a vertex buffer object, an index buffer object (only if the
-geometry has vertex indices data). The parsed uniform data description in the
-material is also used by the geometry module to create a uniform buffer object.
+When a material is assigned, the parsed vertex attributes in the material are used to create a vertex buffer object, an index buffer object (only if the geometry has vertex indices data). The parsed uniform data description in the material is also used by the geometry module to create a uniform buffer object.
 
-This module also deals with Vulkan directly, allocating a descriptor set from
-the assigned material's descriptor pool and recording drawing commands in
-command buffers.
+This module also deals with Vulkan directly, allocating a descriptor set from the assigned material's descriptor pool and recording drawing commands in command buffers.
