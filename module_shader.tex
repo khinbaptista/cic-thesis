@@ -7,7 +7,7 @@ Shaders can define uniform objects containing various uniforms. The uniforms nam
 
 Possible uniform names updated automatically are: "model", "view", "projection", "modelView", "modelViewProjection", their inverse counterparts with "Inverse" as suffix, "cameraMatrix" (which is the view and projection transformations combined) and "normalMatrix" (the inverse transposed 3x3 modelView submatrix). All the matrices must be of type "mat4", except the normal matrix, which must be a "mat3" matrix.
 
-Possible vertex attributes are: "position", "normal", "tangent" and "uv" (texture coordinates). The first three attributes may be either of type "vec3" or "vec4". Position vectors with four components will have W component equal to one; Normal vectors will have a W component equal to zero; Tangent vectors will have either 1 or -1 for its fourth component, indicating which side the binormal vector points to. Texture coordinates must be of type "vec2".
+Possible vertex attributes are: "position", "normal", "tangent" (each may be of types "vec3" or "vec4") and "uv" (texture coordinates, always "vec2"). Position vectors with four components will have W component equal to one; Normal vectors will have a W component equal to zero; Tangent vectors will have either 1 or -1 for its fourth component, indicating which side the binormal vector points to.
 
 Shaders can also define image samplers of type "sampler2D" and "samplerCube" in GLSL. These will be initialized in the material module with a default texture until the user selects a new one using the user interface.
 
