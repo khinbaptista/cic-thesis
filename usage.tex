@@ -1,21 +1,45 @@
 \section{User Interface}
-When the program is opened for the first time, there are already default vertex and fragment shaders, and a "default material". This is a simple material that will be assigned to new objects upon creation. For the common use case, this material can be ignored.
+In this section we'll describe how to use the application, explaining the different panels, their responsibilities and how to use them.
 
-\includegraphics[width=1.5in]{"01-default-shaders"}
-\includegraphics[width=1.5in]{"01-default-material"}
+\includegraphics[width = 3.3in]{"editor/window"}
 
-The user will program the shader using their favorite editor of choice, in GLSL. The shaders' source code must be saved in separate files, ending in ".vert" for the vertex shader and ".frag" for the fragment shader. Then, using our application, the user will load each of these files as a new shader, and give it a name (the shader name defaults to the file name and must be unique). If the shader compilation fails, the shader will not be created, and the compilation error message is displayed in the console. Having created both vertex and fragment shaders successfully, the user can then create a new material and give it a name, which also has to be unique. After the material is created, clicking on it will reveal a panel where the user can change the shaders used in the material. On newly created materials, the default shaders will be used. After choosing the shaders from the drop-down menus, the "apply" button will update the material with the new shaders, and the uniforms defined in the shaders will appear in the editor on the rightmost panel, ready to be modified.
+\subsection{Materials and Shaders}
+When the application is first executed, a default material is loaded. This is a simple material that will be assigned to new objects when they're created.
 
-\includegraphics[width=3.3in]{"03-create-shader"}
+\includegraphics{"editor/material-list"}
 
-\includegraphics[width=3.3in]{"04-material-edit"}
+The create button allows the user to load shaders and create a new material.
 
-\includegraphics[width=3.3in]{"05-uniform-editor"}
+\includegraphics{"editor/create-material"}
 
-Objects can be created in the "Scene Editor" tab. Currently, only geometric primitives can be created, like cubes, spheres, capsules and planes (rather than loading custom objects). Objects are given a name based on their shape (the geometry itself) and their creation order. When an object is selected from the list, their transform is exposed in the rightmost panel, so the user can change the object's position, rotation and scale, and also the material used to render it. When first created, the default material will be used.
+The material name must be unique and the vertex and fragment shaders source files must have a ".vert" and ".frag" extension, respectively.
 
-\includegraphics[width=3.3in]{"07-create-object"}
+When the material is created, the contents of the shader files will be loaded in the shader editor.
 
-\includegraphics[width=3.3in]{"08-inspector-material"}
+\includegraphics{"editor/shader-editor"}
 
-Once the object is created, it should appear in the Vulkan visualization window. To move the camera, the user can right-click inside the window to enter movement mode, an use the WASD keys to move around, Q to move down and E to move up. Moving the mouse will turn the camera in a free-look style.
+The GLSL source code for the vertex and fragment shaders can be altered with ease in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurances and a shader compilation status bar.
+
+In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders will be compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, will display the error messages. When the compilation succeeds, the uniforms defined in the shaders' source codes will be exposed in the material parameters panel.
+
+\includegraphics{"editor/uniform-editor"}
+
+The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are int, uint, float, ivec2, uvec2, vec2, ivec3, uvec3, vec3 and vec4 (will be interpreted as color, ie., the editor will create a color picker for the variable, instead of four numeric fields).
+
+\subsection{Objects}
+
+\includegraphics{"editor/object-list"}
+
+The plus button allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format).
+
+\includegraphics{"editor/add-geometry"}
+
+Newly created objects will be given a name based on their shape (if the object is a primitive) or their file name (if it was created from an object file) and their creation order. New objects will be assigned the default material upon creation.
+
+When an object is selected, their transformation and currently assigned material is displayed on the inspector panel, below the material parameters panel.
+
+\includegraphics{"editor/inspector"}
+
+Changes made to the inspector and the material parameters will take effect immediately.
+
+Once the object is created, it will appear in the Vulkan visualization window. To move the camera, the user can right-click inside the window to enter movement mode, using the WASD keys to move around, Q and E to move down and up, respectively. Moving the mouse while in movement mode will turn the camera in a free-look style.
