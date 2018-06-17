@@ -1,7 +1,12 @@
 \section{User Interface}
 In this section we'll describe how to use the application, explaining the different panels, their responsibilities and how to use them.
 
-\includegraphics[width = 3.3in]{"editor/window"}
+\begin{figure}
+    \centering
+    \includegraphics[width = 3.3in]{"editor/window"}
+    \caption{Application control window}
+    \label{fig:window}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Materials and Shaders}
@@ -9,19 +14,34 @@ When the application is first executed, a default material is loaded. This is a 
 
 The create button allows the user to load shaders and create a new material.
 
-\includegraphics[width=3in]{"editor/create-material"}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=3in]{"editor/create-material"}
+    \caption{Create material dialog}
+    \label{fig:create_material}
+\end{figure}
 
 The material name must be unique and the vertex and fragment shaders source files must have a ".vert" and ".frag" extension, respectively.
 
 When the material is created, the contents of the shader files will be loaded in the shader editor.
 
-\includegraphics[width=3in]{"editor/shader-editor"}
+\begin{figure}
+    \centering
+    \includegraphics[width=3in]{"editor/shader-editor"}
+    \caption{GLSL source editor}
+    \label{fig:shader_editor}
+\end{figure}
 
 The GLSL source code for the vertex and fragment shaders can be altered with ease in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
 
 In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders will be compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, will display the error messages. When the compilation succeeds, the uniforms defined in the shaders' source codes will be exposed in the material parameters panel.
 
-\includegraphics[width=3in]{"editor/uniform-editor"}
+\begin{figure}
+    \centering
+    \includegraphics[width=3in]{"editor/uniform-editor"}
+    \caption{Uniform variable edit panel}
+    \label{fig:uniform_editor}
+\end{figure}
 
 The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are int, uint, float, ivec2, uvec2, vec2, ivec3, uvec3, vec3 and vec4 (will be interpreted as color, ie., the editor will create a color picker for the variable, instead of four numeric fields).
 
@@ -34,7 +54,12 @@ Newly created objects will be given a name based on their shape (if the object i
 
 When an object is selected, their transformation and currently assigned material is displayed on the inspector panel, below the material parameters panel.
 
-\includegraphics[width=3in]{"editor/inspector"}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=3in]{"editor/inspector"}
+    \caption{Object parameter inspector}
+    \label{fig:inspector}
+\end{figure}
 
 Changes made to the inspector and the material parameters will take effect immediately.
 

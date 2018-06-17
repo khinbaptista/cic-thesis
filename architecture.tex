@@ -1,7 +1,7 @@
 \section{Architecture}
-In this work, the most important decision of the architecture was the choice of using Vulkan for the graphics API. Vulkan is a low-overhead, cross-platform 3D graphics and compute API created by the Khronos Group. Using Vulkan has been a learning process, and the architecture chosen for this work is a reflection of that learning process.
+In this work, the most important decision of the architecture was the choice of using Vulkan for the graphics API. Vulkan is a low-overhead, cross-platform 3D graphics and compute API created by the Khronos Group. Using Vulkan has been a learning process, and the architecture chosen for this work is a reflection of that process.
 
-For the purposes of this work, a Material is defined as a combination of a vertex shader and a fragment shader, along with their uniforms values. A Shader is created from the source GLSL code provided by the user, which is then compiled into SPIR-V binary code and stored. In order to be able to preview the material, a Geometry object can be created: a geometri is a combination of vertex attributes (vertex position, normal, tangent and texture coordinates) which will be passed to the graphics pipeline.
+For the purposes of this work, a Material is defined as a combination of a vertex shader and a fragment shader, along with their uniforms values. A Shader is created from the source GLSL code provided by the user, which is then compiled into SPIR-V binary code. In order to be able to view the material in action, a Geometry object can be created: a geometry is a combination of vertex attributes (vertex position, normal, tangent and texture coordinates) which will be passed to the graphics pipeline.
 
 \input{module_shader}
 
