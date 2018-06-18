@@ -1,39 +1,26 @@
 \section{Results}
-The application allows the user to create and visualize different shaders in multiple objects, define an arbitrary number of parameters for each material and also use multiple textures to create the desired visuals.
+The application allows the user to create and visualize different shaders in multiple objects, define an arbitrary number of parameters for each material and also use multiple textures to create the desired visuals. Figure \ref{fig:scene} shows an example scene composed of 5 elements: a dragon, a torus, a sphere, the ground (plane) and the background (a capsule). The ground and the sphere (figure \ref{fig:sphere_closeup}) both use normal mapping with different textures to create two kinds of rocks. The dragon (figure \ref{fig:dragon_closeup} uses Phong shading, and the background uses a simple texture mapping. The torus (figure \ref{fig:torus_closeup}) also uses normal mapping to create the effect displayed.
 
-\begin{figure*}
+\begin{figure}
     \centering
-    \subfloat[Phong shading]{
-        \includegraphics[width = 7cm]{"results/phong"}
-    }
-    \hfil
-    \subfloat[Phong shading with normal mapping]{
-        \includegraphics[width = 7cm]{"results/normal"}
-    }
-    \hfil
-    \subfloat[Multiple objects with different materials]{
-        \includegraphics[width = 13cm]{"results/meshes-multi-material"}
-    }
-
-    \caption{Materials rendered using our application.}
-\end{figure*}
-
-\begin{figure*}
-    \centering
-    \caption{Results}
-    \subfloat[Scene]{
+    \subfloat[Example scene]{
         \includegraphics[width = 7cm]{"results/scene"}
+        \label{fig:scene}
     }
     \hfil
     \subfloat[Dragon closeup]{
         \includegraphics[width = 7cm]{"results/dragon-closeup"}
+        \label{fig:dragon_closeup}
     }
     \hfil
     \subfloat[Torus closeup]{
         \includegraphics[width = 7cm]{"results/torus-closeup"}
+        \label{fig:torus_closeup}
     }
     \hfil
     \subfloat[Sphere closeup]{
         \includegraphics[width = 7cm]{"results/sphere-closeup"}
+        \label{fig:sphere_closeup}
     }
-\end{figure*}
+    \caption{Results}
+\end{figure}
