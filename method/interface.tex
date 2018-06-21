@@ -1,0 +1,69 @@
+\section{User Interface}
+In this section we'll describe how to use the application, explaining the different panels, their responsibilities and how to use them.
+
+\begin{figure}[ht]
+    \caption{Application control window}
+    \begin{center}
+        \includegraphics[width = 15cm]{"editor/window"}
+    \end{center}
+    \label{fig:window}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Materials and Shaders}
+When the application is first executed, a default material is loaded. This is a simple material that will be assigned to new objects when they're created.
+
+The create button (labeled with a plus sign) allows the user to load shaders and create a new material via the 'create material' popup.
+
+\begin{figure}
+    \caption{Create material popup window}
+    \begin{center}
+        \includegraphics[width = 10cm]{"editor/create-material"}
+    \end{center}
+    \label{fig:create-material}
+\end{figure}
+
+The material name must be unique and the vertex and fragment shaders source files must have a ".vert" and ".frag" extension, respectively.
+
+When the material is created, the contents of the shader files will be loaded in the shader editor.
+
+\begin{figure}
+    \centering
+    \caption{Shader editor}
+    \includegraphics[width = 10cm]{"editor/shader-editor"}
+    \label{fig:shader-editor}
+\end{figure}
+
+The GLSL source code for the vertex and fragment shaders can be altered with ease in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
+
+In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders will be compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, will display the error messages. When the compilation succeeds, the uniforms defined in the shaders' source codes will be exposed in the material parameters panel.
+
+\begin{figure}
+    \centering
+    \caption{Uniform editor}
+    \includegraphics[width = 10cm]{"editor/uniform-editor"}
+    \label{fig:uniform-editor}
+\end{figure}
+
+The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are int, uint, float, ivec2, uvec2, vec2, ivec3, uvec3, vec3 and vec4 (will be interpreted as color, ie., the editor will create a color picker for the variable, instead of four numeric fields).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Objects}
+
+The plus button allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format).
+
+Newly created objects will be given a name based on their shape (if the object is a primitive) or their file name (if it was created from an object file) and their creation order. New objects will be assigned the default material upon creation.
+
+When an object is selected, their transformation and currently assigned material is displayed on the inspector panel, below the material parameters panel.
+
+\begin{figure}
+    \centering
+    \caption{Inspector}
+    \includegraphics[width = 7cm]{"editor/inspector"}
+    \label{fig:inspector}
+\end{figure}
+
+Changes made to the inspector and the material parameters will take effect immediately.
+
+Once the object is created, it will appear in the Vulkan visualization window. To move the camera, the user can right-click inside the window to enter movement mode, using the WASD keys to move around, Q and E to move down and up, respectively. Moving the mouse while in movement mode will turn the camera in a free-look style.

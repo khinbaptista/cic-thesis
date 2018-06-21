@@ -1,0 +1,24 @@
+\subsection{Vulkan Application Module}
+Vulkan is a low-level API and, as such, requires developers to setup a large amount of objects and configurations before displaying anything on screen. This module is responsible for creating these objects required for rendering.
+
+\subsubsection{Vulkan Instance}
+There is no global state in Vulkan and all per-application state is stored in a VkInstance object. Creating a VkInstance object initializes the Vulkan library and allows the application to pass information about itself to the implementation \cite{vulkan_docs}. Applications can even define and manage multiple instances if they so desire.
+
+In order to initialize a Vulkan instance object, we first need to create a VkApplicationInfo structure object, which will describe our application for the driver. This structure hold the name and version of the application, and also the name and version of the engine used. This data is technically optional, but it may provide some useful information to the driver to optimize for our specific application, for example because it uses a well-known graphics engine with certain special behavior \cite{vulkan_tutorial}. Unlike the VkApplicationInfo, the VkInstanceCreateInfo structure object is not optional. It describes the instance extensions and debug layers we want to enable in our application. To make sure our application can be executed, we can check the available extensions with the function vkEnumerateInstanceExtensionProperties to compare against our required extensions. In our application, we are using GLFW for window management, which provides the glfwGetRequiredInstanceExtensions function \cite{glfw_vulkan} to query the required functions for surface creation on any platform supported by the library.
+
+During the Vulkan instance object creation we can also specify validation layers to be enabled. Available validation layers can be queried with the vkEnumerateInstanceLayerProperties function. The Vulkan SDK provides a standard validation layer, "VK\_LAYER\_LUNARG\_standard\_validation", which implicitly enables a range of useful diagnostic layers. In order to receive the debug messages from the validation layers, however, the application must also enable the "VK\_EXT\_debug\_report" extension, which will allow the developer to setup a callback function that will be called whenever a debug message is issued by the validation layers. To setup the debug callback function, the developer has to get a pointer to the vkCreateDebugReportCallbackEXT, which is an extension function and therefore not included in the base API, using the vkGetInstanceProcAddr function.
+
+\subsubsection{Physical Device}
+The function vkEnumeratePhysicalDevices returns a list of available Vulkan devices installed in the system. Basic device properties like the name, type and supported Vulkan version can be queried using vkGetPhysicalDeviceProperties. The support for optional features like texture compression, 64 bit floats and multi viewport rendering can be queried using vkGetPhysicalDeviceFeatures. Device features must be enabled before they are used by the application.
+
+Almost every operation in Vulkan, from drawing to uploading textures, requires commands to be submitted to a queue. A queue belongs to a \emph{queue family}, and each queue family supports certain types of commands. For a rendering application like ours, we need a queue able to render graphics, and another queue for presentation (displaying images in the window). These queues could be the same, if the physical device presents a single queue with both graphics and presentation capabilities. To query queue families, there is a vkGetPhysicalDeviceQueueFamilyProperties function.
+
+With a list of the available devices, their features and queue families, we can select a VkPhysicalDevice and create a logical device to interface with it.
+
+\subsubsection{Device}
+The logical device creation process is similar to the instance creation process and describes the features we want to use in our application. We also need to specify which queues to create from the queue families that are available. 
+
+The function vkCreateDevice takes the physical device we selected and a VkDeviceCreateInfo object as arguments. The latter describes which physical device features we want to enable from our selected physical device. We must also specify the queues we want to create, indicating the queue family index and amount of queues we want to create from each family. After the device is created, the application can call the vkGetDeviceQueue function to get the VkQueue objects to which commands will be passed into.
+
+\subsubsection{Window Surface}
+
