@@ -21,4 +21,18 @@ The logical device creation process is similar to the instance creation process 
 The function vkCreateDevice takes the physical device we selected and a VkDeviceCreateInfo object as arguments. The latter describes which physical device features we want to enable from our selected physical device. We must also specify the queues we want to create, indicating the queue family index and amount of queues we want to create from each family. After the device is created, the application can call the vkGetDeviceQueue function to get the VkQueue objects to which commands will be passed into.
 
 \subsubsection{Window Surface}
+In order to display images, the Vulkan API must interface withb the platform specific window system. Also, since Vulkan is also a compute API, this functionality is not in the core API, but is part of the "VK\_KHR\_surface". Window systems also vary for each platform so, in order to create the proper surface object, we also need to enable the platform surface extension ("VK\_KHR\_win32\_surface" for Windows, for example). Luckily, GLFW enables the required extensions with glfwGetRequiredInstanceExtensions, and provides a simple glfwCreateWindowSurface function which simply returns a surface appropriate for the current platform.
+
+\subsubsection{Swap Chain}
+Unlike OpenGL, Vulkan does not have the concept of a "default framebuffer", hence it requires a structure to own the buffers where images will be rendered before they are displayed on the screen. This is the swap chain, and it must be explicitly created in Vulkan. Creating a swap chain object requires the "VK\_KHR\_swapchain" device extension enabled. The swap chain is essentially a queue of images that are waiting to be prensented on the screen.
+
+Each physical device provides different capabilities in its swap chain. These include tha maximum number of images the swap chain can hold, the pixel formats supported and presentation modes. The presentation modes, according to \cite{vulkan_tutorial}, are:
+\begin{itemize}
+    \item VK\_PRESENT\_MODE\_IMMEDIATE\_KHR: ages submitted by your application are transferred to the screen right away, which may result in tearing;
+    \item VK\_PRESENT\_MODE\_FIFO\_KHR: The swap chain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. This is the only mode that is guaranteed to be supported;
+    \item VK\_PRESENT\_MODE\_FIFO\_RELAXED\_KHR: This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing;
+    \item VK\_PRESENT\_MODE\_MAILBOX\_KHR: This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.
+\end{itemize}
+
+In our application, we select the mailbox present mode if available; if not, we use the FIFO, which is the only one guaranteed to be supported.
 
