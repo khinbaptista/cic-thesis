@@ -57,10 +57,19 @@ After the shaders are parsed, the Material module will create the descriptor set
 This Vulkan object that holds a pool of descriptors, from where descriptor sets are allocated. The descriptor pool requires the number of uniform buffers and image samplers, but is not concerned about the size of these structures. The descriptor pool also defines how many descriptor sets can be allocated from it. For our application, this translates into how many different objects can have the same material applied at a given time.
 
 \subsubsection{Pipeline}
-In order to create the \texttt{VkPipeline} object, we first need to create a \texttt{VkPipelineLayout} object. The pipeline layout defines the interface of the pipeline object with our application, which means it holds a reference to the descriptor set layout object and also for push constants, a different method to pass data to shaders that is not used in our application.
+In order to create the \texttt{VkPipeline} object, we first need to create a \texttt{VkPipelineLayout} object. The pipeline layout defines the interface of the pipeline object with our application, which means it holds a reference to the descriptor set layout object and also for push constants, a different method to pass data to shaders that is not used by our application. We also create objects that will configure every stage in the graphics pipeline:
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+    \item \texttt{VkPipelineVertexInputStateCreateInfo}
+    \item \texttt{VkPipelineInputAssemblyStateCreateInfo}
+    \item \texttt{VkPipelineViewportStateCreateInfo}
+    \item \texttt{VkPipelineRasterizationStateCreateInfo}
+    \item \texttt{VkPipelineMultisampleStateCreateInfo}
+    \item \texttt{VkPipelineDepthStencilStateCreateInfo}
+    \item \texttt{VkPipelineColorBlendStateCreateInfo}
+    \item \texttt{VkPipelineShaderStageCreateInfo}
+\end{itemize}
 
-The material module also deals with many aspects of the Vulkan API, like creating a descriptor pool, a descriptor set layout, a pipeline layout and a pipeline object.
+Each of the structures mentioned above have a set of possible configurations which will determine, for example, the topology used when interpreting the vertex data (points, lines, triangles), polygon mode to use in rasterization (points, lines, fill), line width, back face culling, depth comparison operation and alpha blending.
 
-Uniforms objects and samplers must have different binding decoration numbers specified in GLSL using the layout qualifier.
+The pipeline object is used in render operations in command buffer objects from the Vulkan application module.
