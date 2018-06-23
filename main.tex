@@ -1,30 +1,10 @@
 \documentclass[cic,tc,english]{iiufrgs}
-% Para usar o modelo, deve-se informar o programa e o tipo de documento.
-% Programas :
-% * cic       -- Graduação em Ciência da Computação
-% * ecp       -- Graduação em Ciência da Computação
-% * ppgc      -- Programa de Pós Graduação em Computação
-% * pgmigro   -- Programa de Pós Graduação em Microeletrônica
-% 
-% Tipos de Documento:
-% * tc                -- Trabalhos de Conclusão (apenas cic e ecp)
-% * diss ou mestrado  -- Dissertações de Mestrado (ppgc e pgmicro)
-% * tese ou doutorado -- Teses de Doutorado (ppgc e pgmicro)
-% * ti                -- Trabalho Individual (ppgc e pgmicro)
-% 
-% Outras Opções:
-% * english    -- para textos em inglês
-% * openright  -- Força início de capítulos em páginas ímpares (padrão da
-% biblioteca)
-% * oneside    -- Desliga frente-e-verso
-% * nominatalocal -- Lê os dados da nominata do arquivo nominatalocal.def
-
 
 % Use unicode
-\usepackage[utf8]{inputenc}   % pacote para acentuação
+\usepackage[utf8]{inputenc}
 
 % Necessário para incluir figuras
-\usepackage{graphicx}         % pacote para importar figuras
+\usepackage{graphicx}
 \graphicspath{{figs/}}
 \DeclareGraphicsExtensions{.pdf,.jpg,.png}
 
@@ -32,29 +12,18 @@
 % \usepackage{palatino}
 % \usepackage{mathptmx}       % p/ usar fonte Adobe Times nas fórmulas
 
-\usepackage[alf,abnt-emphasize=bf]{abntex2cite}	% pacote para usar citações abnt
-
-%\usepackage{listings}
-%lstset{language=C++}
+\usepackage[alf,abnt-emphasize=bf]{abntex2cite}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 % Informações gerais
-% 
+%
 \title{An Interactive Tool for Learning and Exploring Shader Programming}
-
 \author{Baptista}{Khin Emmanuel Rodrigues}
-
-% orientador e co-orientador são opcionais (não diga isso pra eles :))
 \advisor[Prof.~Dr.]{Oliveira}{Manuel Menezes de}
 
-% a data deve ser a da defesa; se nao especificada, são gerados
-% mes e ano correntes
 \date{julho}{2018}
-
-% o local de realização do trabalho pode ser especificado (ex. para TCs)
-% com o comando \location:
 \location{Porto Alegre}{RS}
 
 % itens individuais da nominata podem ser redefinidos com os comandos
@@ -92,10 +61,10 @@
 % \coord[Profa.~Dra.]{Weber}{Taisy da Silva} % coordenador do curso
 % \dept{INA}                                 % departamento relacionado
 
-% 
+%
 % palavras-chave
 % iniciar todas com letras minúsculas, exceto no caso de abreviaturas
-% 
+%
 \keyword{formatação eletrônica de documentos}
 \keyword{\LaTeX}
 \keyword{ABNT}
@@ -106,9 +75,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 
-% inicio do documento
-% 
 \begin{document}
 
 % folha de rosto
@@ -165,9 +131,8 @@
 % sumario
 \tableofcontents
 
-% aqui comeca o texto propriamente dito
-
-% introducao
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{introduction.tex}
 
@@ -181,15 +146,8 @@
 
 \input{future.tex}
 
-
-% e aqui vai a parte principal
-% 
-% \chapter{Estado da arte}
-% \chapter{Mais estado da arte}
-% \chapter{A minha contribuição}
-% \chapter{Prova de que a minha contribuição é válida}
-% \chapter{Conclusão}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Template e dicas}
 
@@ -204,14 +162,14 @@ A Figura~\ref{fig:ex1} representa o caso mais comum, onde a figura propriamente 
     \begin{center}
         % Aqui vai um includegraphics , um picture environment ou qualquer
         % outro comando necessário para incorporar o formato de imagem
-        % utilizado.        
+        % utilizado.
         \begin{picture}(100,100)
             \put(0,0){\line(0,1){100}}
             \put(0,0){\line(1,0){100}}
             \put(100,100){\line(0,-1){100}}
             \put(100,100){\line(-1,0){100}}
             \put(10,50){Uma Imagem}
-        \end{picture}    
+        \end{picture}
     \end{center}
     \label{fig:estrutura}
     \legend{Fonte: Os Autores}
@@ -303,7 +261,7 @@ biblio.bib).
 % aqui será usado o environment padrao `thebibliography'; porém, sugere-se
 % seriamente o uso de BibTeX e do estilo abnt.bst (veja na página do
 % UTUG)
-% 
+%
 % observe também o estilo meio estranho de alguns labels; isso é
 % devido ao uso do pacote `natbib', que permite fazer citações de
 % autores, ano, e diversas combinações desses

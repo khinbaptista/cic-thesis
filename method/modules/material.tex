@@ -1,6 +1,66 @@
 \subsection{Material Module}
-A Material is a combination of a vertex and a fragment shader, plus the values of the uniform variables defined in those shaders.
+A Material is a combination of a vertex and a fragment shader, plus the values of the uniform variables defined in those shaders. It is responsible for the creation of the Vulkan graphics pipeline object, based on the shaders applied to the material and other configurations.
 
-The material module is responsible for parsing the shaders' SPIR-V codes and check uniform names. The code analysis is done using a third-party library, SPIRV-Cross, a tool and library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages. After the analysis, a description of the requested uniform data is created in order to allow the creation of the uniform buffer object later on. It also parses the image samplers and the attributes requested by the shader code.
+\subsubsection{Shader Parsing}
+The shaders added to the material will have their SPIR-V code parsed by the \emph{SPIRV Cross} library. Our application will use this data to load the appropriate vertex attributes, uniform objects and sampler objects used by the shaders.
+
+Shaders define which vertex attributes will be used as input, and uniform variables can serve as parameters for the material. All vertex attributes must be recognized by the application, following the defined names and types defined in table \ref{tab:vertex_attributes}. The user can also query the application for certain uniform variables, following the names and types defined in table \ref{tab:uniform_variables}.
+
+\begin{table}[h]
+    \centering
+    \caption{Recognized vertex attributes}
+    \begin{tabular}{|c|c|p{6cm}|}
+    \hline
+        \textit{Type} & \textit{Name} & \textit{Description} \\
+        \hline \hline
+        vec3 or vec4 & \texttt{position} & Vertex position \\
+        vec3 or vec4 & \texttt{normal} & Normal vector of the surface \\
+        vec3 or vec4 & \texttt{tangent} & Tangent vector to the surface \\
+        vec2 & \texttt{uv} & Texture coordinate \\
+        \hline
+    \end{tabular}
+    \label{tab:vertex_attributes}
+\end{table}
+
+If the \texttt{position} attribute is a vec4, the fourth component will be set to one; If the \texttt{normal} is a vec4, the fourth component will be set to zero; If the \texttt{tangent} is a vec4, the fourth component will be either set do 1 or -1, indicating the direction pointed by the binormal vector, used in normal mapping.
+
+\begin{table}[h]
+    \centering
+    \caption{Recognized uniform variables}
+    \begin{tabular}{|c|c|p{6cm}|}
+        \hline
+        \textit{Type} & \textit{Name} & \textit{Description} \\
+        \hline
+        \hline
+        mat4 & \texttt{model} & Model matrix \\
+        mat4 & \texttt{view} & View matrix \\
+        mat4 & \texttt{projection} & Projection matrix \\
+        mat4 & \texttt{modelView} & Model-View matrix \\
+        mat4 & \texttt{modelViewProjection} & Model-View-Projection matrix \\
+        mat4 & \texttt{modelInverse} & Model matrix inverse \\
+        mat4 & \texttt{viewInverse} & View matrix inverse \\
+        mat4 & \texttt{projectionInverse} & Projection matrix inverse \\
+        mat4 & \texttt{modelViewInverse} & Model-View matrix inverse \\
+        mat4 & \texttt{modelViewProjectionInverse} & Model-View-Projection matrix inverse \\
+        mat3 & \texttt{normalMatrix} & Matrix to transform the normal vectors of the object; Corresponds to the inverse transposed 3x3 model-view submatrix \\
+        \hline
+    \end{tabular}
+    \label{tab:uniform_variables}
+\end{table}
+
+The shader code can also define arbitrary uniform variables, which will be initialized to a default value and exposed in the control window so the user can change the values manually. Numeric values are initialized to 1 to avoid division by zero. Image samplers defined in code will be initialized to a white texture.
+
+\subsubsection{Descriptor Set Layout}
+After the shaders are parsed, the Material module will create the descriptor set layout object (\texttt{VkDescriptorSetLayout}). This object describes the bindings that are used in the shaders, whether they bind a uniform buffer object or an image sampler, and at which stages each binding is available. In our case, every uniform buffer object and image sampler is available in all graphics stages (vertex and fragment). For this reason, the shaders must declare the binding of each uniform buffer object and image sampler used in GLSL code, and the binding numbers cannot be reused. This is done in GLSL by using the layout qualifier in the declaration of the uniforms.
+
+\subsubsection{Descriptor Pool}
+This Vulkan object that holds a pool of descriptors, from where descriptor sets are allocated. The descriptor pool requires the number of uniform buffers and image samplers, but is not concerned about the size of these structures. The descriptor pool also defines how many descriptor sets can be allocated from it. For our application, this translates into how many different objects can have the same material applied at a given time.
+
+\subsubsection{Pipeline}
+In order to create the \texttt{VkPipeline} object, we first need to create a \texttt{VkPipelineLayout} object. The pipeline layout defines the interface of the pipeline object with our application, which means it holds a reference to the descriptor set layout object and also for push constants, a different method to pass data to shaders that is not used in our application.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The material module also deals with many aspects of the Vulkan API, like creating a descriptor pool, a descriptor set layout, a pipeline layout and a pipeline object.
+
+Uniforms objects and samplers must have different binding decoration numbers specified in GLSL using the layout qualifier.
