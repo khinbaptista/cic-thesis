@@ -14,12 +14,12 @@ While OpenGL drivers manage memory allocations transparently to the programmer, 
     \label{fig:vulkan_mem_alloc}
 \end{figure}
 
-This diagram illustrates three memory allocation strategies \cite{vulkan_mem_mgmt}.
+The diagram in figure \ref{fig:vulkan_mem_alloc} illustrates three memory allocation strategies \cite{vulkan_mem_mgmt}.
 The rightmost is the naive approach: for each buffer is performed a "dedicated" memory allocation. This approach is the easiest to implement, since every object allocates, binds and frees their own memory, without taking into account other objects created. It is also the least optimized approach, given that this most likely will not be cache-friendly. It is also important to note that Vulkan devices have a maximum number of memory allocations that can exist simultaneously;
 The approach shown in the middle, captioned "The Bad", shows a single memory allocation with various buffers bound to it. This approach is more cache-friendly than the previous one, but it requires the programmer to deal with memory aliasing, offsets and buffer alignments;
 The leftmost, captioned as "The Good", is the recommended approach. It represents a single memory allocation bound to a single buffer, with different data loaded to different areas of the buffer. This approach is the most cache-friendly and the most optimized for performance in highly dynamic scenes, but also the most difficult to implement. This setup is possible thanks to Vulkan low-level control of offsets even inside a single buffer, allowing the developer to define "virtual buffers".
 
-In this work, our goal was to build a simple scene with few objects, for the purposes of visualization only. For this reason, we opted to use the naive approach. Implementing a memory management module would not perceivably impact on the performance of the application.
+In this work, our goal was to allow the user to build simple scenes with few objects, for the purposes of visualization only. For this reason, we opted to use the naive approach. Implementing a memory management module would not perceivably impact on the performance of the application.
 
 \subsection{Compiling shaders}
 Up until OpenGL 4.6, application had to be compile shader source code at run-time, passing a string of high-level source code to the graphics driver. While this allowed the application to run on different hardware, this also forced each GPU manufacturer to provide a GLSL compiler with the device driver, making it difficult for vendors to update and support new versions of the API in their drivers.
