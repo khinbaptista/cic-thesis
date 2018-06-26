@@ -1,5 +1,5 @@
 \subsection{Shader Module}
-A Shader object represents one stage of the programmable pipeline stages. This module has a type indication, either vertex or fragment, and is capable of loading GLSL source files, and compiling them into SPIR-V binary using the ShaderC library, developed by Google. The compiled code is then enclosed by a VkShaderModule object which will be used in a graphics pipeline.
+A Shader object represents one stage of the programmable pipeline stages. This module has a type indication, either vertex or fragment, and is capable of loading GLSL source files and compiling them into SPIR-V binary using the ShaderC library, developed by Google. The compiled code is then enclosed by a 'VkShaderModule' object which will be used in a material's graphics pipeline.
 
 The type of the shader is inferred when a GLSL shader file is loaded based on the extension of the shader file, '.vert' for a vertex shader and '.frag' for a fragment shader.
 

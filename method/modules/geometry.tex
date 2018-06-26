@@ -10,6 +10,15 @@ For the uniform buffer to be passed to the shaders, we need to allocate a descri
 \subsubsection{Recording Drawing Commands}
 Since all drawing operations are recorded in advance in Vulkan, this module also provides a method for recording the drawing commands in a command buffer previously initialized.
 
+\begin{itemize}
+    \item \texttt{VkCmdBindPipeline}: Binds the graphics pipeline of the material applied to the object;
+    \item \texttt{VkCmdBindVertexBuffer}: Binds the vertex buffer of the object, which contains the vertex attributes;
+    \item \texttt{VkCmdBindDescriptorSets}: Binds the descriptor set which contains the uniform variables data;
+    \item \texttt{VkCmdBindIndexBuffer}: If the object presents index data, binds the buffer containing the indices;
+    \item \texttt{VkCmdDrawIndexed}: Draw the object using the index buffer;
+    \item \texttt{VkCmdDraw}: Draw object without indices.
+\end{itemize}
+
 \subsubsection{Updating Uniform Buffers}
 The function to update uniform buffers is called by the Vulkan application module, and expects a structures containing certain uniform values that are not dependent on the object, such as the camera's view and projection matrices. The other matrices are calculated and loaded into the appropriate buffers.
 

@@ -1,5 +1,5 @@
 \subsection{Material Module}
-A Material is a combination of a vertex and a fragment shader, plus the values of the uniform variables defined in those shaders. It is responsible for the creation of the Vulkan graphics pipeline object, based on the shaders applied to the material and other configurations.
+A Material is a combination of a vertex and a fragment shader, plus the values of the uniform variables defined in those shaders. It is responsible for the creation of the Vulkan graphics pipeline object, based on the shaders loaded into it and other configuration values.
 
 \subsubsection{Shader Parsing}
 The shaders added to the material will have their SPIR-V code parsed by the \emph{SPIRV Cross} library. Our application will use this data to load the appropriate vertex attributes, uniform objects and sampler objects used by the shaders.
@@ -51,13 +51,13 @@ If the \texttt{position} attribute is a vec4, the fourth component will be set t
 The shader code can also define arbitrary uniform variables, which will be initialized to a default value and exposed in the control window so the user can change the values manually. Numeric values are initialized to 1 to avoid division by zero. Image samplers defined in code will be initialized to a white texture.
 
 \subsubsection{Descriptor Set Layout}
-After the shaders are parsed, the Material module will create the descriptor set layout object (\texttt{VkDescriptorSetLayout}). This object describes the bindings that are used in the shaders, whether they bind a uniform buffer object or an image sampler, and at which stages each binding is available. In our case, every uniform buffer object and image sampler is available in all graphics stages (vertex and fragment). For this reason, the shaders must declare the binding of each uniform buffer object and image sampler used in GLSL code, and the binding numbers cannot be reused. This is done in GLSL by using the layout qualifier in the declaration of the uniforms.
+After the shaders are parsed, the Material module will create the descriptor set layout object ('VkDescriptorSetLayout'). This object describes the bindings that are used in the shaders, whether they bind a uniform buffer object or an image sampler, and at which stages each binding is available. In our case, every uniform buffer object and image sampler is available in all graphics stages (vertex and fragment). For this reason, the shaders must declare the binding of each uniform buffer object and image sampler used in GLSL code, and the binding numbers cannot be reused. This is done in GLSL by using the layout qualifier in the declaration of the uniforms.
 
 \subsubsection{Descriptor Pool}
 This Vulkan object that holds a pool of descriptors, from where descriptor sets are allocated. The descriptor pool requires the number of uniform buffers and image samplers, but is not concerned about the size of these structures. The descriptor pool also defines how many descriptor sets can be allocated from it. For our application, this translates into how many different objects can have the same material applied at a given time.
 
 \subsubsection{Pipeline}
-In order to create the \texttt{VkPipeline} object, we first need to create a \texttt{VkPipelineLayout} object. The pipeline layout defines the interface of the pipeline object with our application, which means it holds a reference to the descriptor set layout object and also for push constants, a different method to pass data to shaders that is not used by our application. We also create objects that will configure every stage in the graphics pipeline:
+In order to create the 'VkPipeline' object, we first need to create a 'VkPipelineLayout' object. The pipeline layout defines the interface of the pipeline object with our application, which means it holds a reference to the descriptor set layout object and also for push constants, a different method to pass data to shaders that is not used by our application. We also create objects that will configure every stage in the graphics pipeline:
 
 \begin{itemize}
     \item \texttt{VkPipelineVertexInputStateCreateInfo}
