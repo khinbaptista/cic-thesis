@@ -1,5 +1,5 @@
 \section{User Interface}
-In this section we'll describe how to use the application, explaining the different panels, their responsibilities and how to use them.
+In this section we will describe how our application works from a user perspective, explaining the different panels, their responsibilities and how to use them.
 
 \begin{figure}[ht]
     \caption{Application control window}
@@ -12,11 +12,11 @@ In this section we'll describe how to use the application, explaining the differ
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Materials and Shaders}
-When the application is first executed, a default material is loaded. This is a simple material that will be assigned to new objects when they're created.
+When the application is first executed, a default material is loaded. This is a simple unshaded material that will be assigned to new objects when they're created. This material does not require the geometry to have any any attributes other than position, which ensures this material can be applied to any loaded mesh.
 
-The create button (labeled with a plus sign) allows the user to load shaders and create a new material via the 'create material' popup.
+The create button (labeled with a plus sign) allows the user to load shaders and create a new material via the create material popup window (Figure \ref{fig:create-material}).
 
-\begin{figure}
+\begin{figure}[h]
     \caption{Create material popup window}
     \begin{center}
         \includegraphics[width = 10cm]{"editor/create-material"}
@@ -26,44 +26,102 @@ The create button (labeled with a plus sign) allows the user to load shaders and
 
 The material name must be unique and the vertex and fragment shaders source files must have a ".vert" and ".frag" extension, respectively.
 
-When the material is created, the contents of the shader files will be loaded in the shader editor.
+When the material is created, the contents of the shader files will be loaded in the shader editor (Figure \ref{fig:shader-editor}). At this point, the material is not ready for usage yet.
 
 \begin{figure}
-    \centering
     \caption{Shader editor}
-    \includegraphics[width = 10cm]{"editor/shader-editor"}
+    \begin{center}
+        \includegraphics[width = 10cm]{"editor/shader-editor"}
+    \end{center}
     \label{fig:shader-editor}
 \end{figure}
 
-The GLSL source code for the vertex and fragment shaders can be altered with ease in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
+The GLSL source code for the vertex and fragment shaders can be altered in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
 
-In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders will be compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, will display the error messages. When the compilation succeeds, the uniforms defined in the shaders' source codes will be exposed in the material parameters panel.
+In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders will be compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, will display the error messages. When the compilation succeeds, the uniforms defined in the shaders' source code will be exposed in the material parameters panel (Figure \ref{fig:uniform-editor}).
 
 \begin{figure}
-    \centering
     \caption{Uniform editor}
-    \includegraphics[width = 10cm]{"editor/uniform-editor"}
+    \begin{center}
+        \includegraphics[width = 10cm]{"editor/uniform-editor"}
+    \end{center}
     \label{fig:uniform-editor}
 \end{figure}
 
-The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are int, uint, float, ivec2, uvec2, vec2, ivec3, uvec3, vec3 and vec4 (will be interpreted as color, ie., the editor will create a color picker for the variable, instead of four numeric fields).
+The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are described in table \ref{tab:uniform_types}.
+
+\begin{table}
+    \centering
+    \caption{Recognized types for uniform variables}
+    \begin{tabular}{|c|p{10cm}|}
+        \hline
+        Type name & Widget created \\
+        \hline \hline
+        \texttt{int} & Single numerical input widget. Accepts values from -10000 to 10000. Fractions are rounded. \\ \hline
+        \texttt{uint} & Single numeric input widget. Accepts values between 0 and 10000. Fractions are rounded. \\ \hline
+        \texttt{float} & Single numeric input field. Accepts values between -10000.0 and 10000.0. Uses 2 decimal digits. \\ \hline
+        \texttt{ivec2} & Two numerical input widgets. Each widget follows the same input rules as \texttt{int}. \\ \hline
+        \texttt{uvec2} & Two numerical input widgets. Each widget follows the same input rules as \texttt{uint}. \\ \hline
+        \texttt{vec2} & Two numerical input widgets. Each widget follows the same input rules as \texttt{float}. \\ \hline
+        \texttt{ivec3} & Three numerical input widgets. Each widget follows the same input rules as \texttt{int}. \\ \hline
+        \texttt{uvec3} & Three numerical input widgets. Each widget follows the same input rules as \texttt{uint}. \\ \hline
+        \texttt{vec3} & Three numerical input widgets. Each widget follows the same input rules as \texttt{float}. \\ \hline
+        \texttt{vec4} & Color picker widget \\
+        \hline
+    \end{tabular}
+    \label{tab:uniform_types}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Objects}
 
-The plus button allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format).
+The plus button on the objects panel allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format). The geometry primitives provided are: capsule, cube, cylinder, plane, prism and sphere.
 
-Newly created objects will be given a name based on their shape (if the object is a primitive) or their file name (if it was created from an object file) and their creation order. New objects will be assigned the default material upon creation.
-
-When an object is selected, their transformation and currently assigned material is displayed on the inspector panel, below the material parameters panel.
+Newly created objects will be given a name based on their shape (if the object is a primitive) or their file name (if it was created from a mesh file), and their creation order. New objects will be assigned the default material upon creation, and will instantly appear in the in the scene (figure \ref{fig:default_material}).
 
 \begin{figure}
-    \centering
+    \caption{Dragon mesh with the default material}
+    \begin{center}
+        \includegraphics[width = 14cm]{"editor/default_material"}
+    \end{center}
+    \label{fig:default_material}
+\end{figure}
+
+When an object is selected, their transformation and currently assigned material are displayed on the inspector panel, below the material parameters panel (Figures \ref{fig:uniform-editor} and \ref{fig:inspector}). Changes made to the inspector and the material parameters will take effect immediately.
+
+\begin{figure}
     \caption{Inspector}
-    \includegraphics[width = 7cm]{"editor/inspector"}
+    \begin{center}
+        \includegraphics[width = 10cm]{"editor/inspector"}
+    \end{center}
     \label{fig:inspector}
 \end{figure}
 
-Changes made to the inspector and the material parameters will take effect immediately.
+\begin{figure}
+    \caption{Available materials appear in the inspector drop-down menu}
+    \begin{center}
+        \includegraphics[width = 6cm]{"editor/material_selection"}
+    \end{center}
+    \label{fig:material_selection}
+\end{figure}
 
-Once the object is created, it will appear in the Vulkan visualization window. To move the camera, the user can right-click inside the window to enter movement mode, using the WASD keys to move around, Q and E to move down and up, respectively. Moving the mouse while in movement mode will turn the camera in a free-look style.
+\subsection{Navigation}
+To navigate through the scene, the user can right-click inside the window to enable movement.
+
+\begin{table}[h]
+    \centering
+    \caption{Scene navigation controls}
+    \begin{tabular}{|c|p{8cm}|}
+        \hline
+        Input & Action \\
+        \hline \hline
+        Mouse right click & When pressed, enables movement \\ \hline
+        Mouse movement & When movement is enabled, rotates the camera around its own center, looking around \\ \hline
+        'W' key & Move the camera forward, relative to its current orientation \\ \hline
+        'A' key & Move the camera to the left, relative to its current orientation \\ \hline
+        'S' key & Move the camera backward, relative to its current orientation \\ \hline
+        'D' key & Move the camera to the right, relative to its current orientation \\
+        \hline
+    \end{tabular}
+    \label{tab:my_label}
+\end{table}

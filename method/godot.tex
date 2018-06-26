@@ -1,18 +1,18 @@
 \section{Godot Engine}
-Godot Engine is a 2D and 3D game engine, free and open source under the MIT license. It provides a set of common tools for game development, including many GUI widgets, like buttons, menus, panels and text editors, which is exactly what we needed to build the control window of our application, while being able to easily deploy to different platforms.
+Godot Engine is a 2D and 3D game engine, free and open source under the MIT license. It provides a set of common tools for game development, including many GUI widgets, like buttons, menus, panels and text editors, which is exactly what we needed to build the control window of our application in a very easy to use and to script way, while being able to deploy to different platforms.
 
 \subsection{GDNative}
-GDNative is a module of Godot Engine which adds a new "scripting language" to it \cite{gdnative_post}. In reality, it is not a language, but a precompiled dynamic library that will be loaded into the Godot application. GDNative allows developers to access the Godot API and create scripts using different languages, for example C and C++,  and use these scripts inside Godot.
+GDNative is a module of Godot Engine which adds a new "scripting language" to it \cite{gdnative_post}. In reality, it is not a language, but a precompiled dynamic library that will be loaded into the Godot application. GDNative allows developers to access the Godot API and create scripts using different languages, for example C and C++,  and use these scripts inside Godot as if they were scripts native to the engine.
 
 There are two big use cases for GDNative:
 
 \begin{itemize}
     \item To allow developers to write \textbf{performance critical code} in more efficient languages than GDScript (the scripting language used by Godot Engine). GDScript is a good scripting language, but it was not built for performance. An example task that fits this scenario is generating terrain procedurally.
-    \item To allow developers to \textbf{bring third-party code to Godot}. This is useful in game development in general to integrate useful libraries like Steamworks and Google Play Services. In our case, bring Vulkan code into the application.
+    \item To allow developers to \textbf{bring third-party code to Godot}. This is useful in game development in general to integrate useful libraries like Steamworks and Google Play Services. In our case, we used it to bring Vulkan code into the application.
 \end{itemize}
 
 GDNative is provided as a C API. In order to use other languages, bindings to the original API must be created. Fortunately, the C++ bindings are officially supported.
 
-In order to have our Vulkan code respond to changes in the control window, some of the classes in our architecture are exposed to GDScript. GDNative requires the developer to register each method that will be made available in GDScript, which allows our application to provide a minimal interface, keeping the implementation encapsulated, separated from the GUI in the control window.
+In order to have our Vulkan code respond to changes in the control window, some of the classes in our architecture are exposed to GDScript. GDNative requires the developer to register each method that will be made available for engine scripts to call, which allows our application to provide a minimal interface, keeping the implementation encapsulated, separated from the GUI in the control window.
 
 Since GDNative loads a pre-compiled dynamic library, it is required for the developer to provide the library for the platforms to which the project is to be deployed. The development of our application was completely done in Linux, and thus it is the only platform the library has been compiled into, but our code does not rely on any platform-dependent libraries, so compiling to Windows or MacOS should be easy.

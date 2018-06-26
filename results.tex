@@ -1,60 +1,76 @@
 \chapter{Results}
 The application allows the user to create and visualize different shaders in multiple objects, define an arbitrary number of parameters for each material and also use multiple textures to create the desired visuals.
 
-In figure \ref{fig:phong_sphere}, we see a sphere illuminated using the Phong illumination model and shading (illumination is calculated per pixel). 
+In figure \ref{fig:phong_sphere}, we see a sphere illuminated using the Phong illumination model and shading (illumination is calculated per pixel).
 
-\begin{figure}
-    \centering
+\begin{figure}[ht]
     \caption{Phong shading}
-    \includegraphics[width = 7cm]{"results/phong"}
+    \begin{center}
+        \includegraphics[width = 7cm]{"results/phong"}
+    \end{center}
     \label{fig:phong_sphere}
 \end{figure}
 
-\begin{figure}
-    \centering
+In figure \ref{fig:phong_normal_sphere}, the same shading model is applied, but the illumination computation uses normal mapping to perturb the normal vectors of the sphere.
+
+\begin{figure}[ht]
     \caption{Phong shading with normal mapping}
-    \includegraphics[width = 7cm]{"results/normal"}
+    \begin{center}
+        \includegraphics[width = 7cm]{"results/normal"}
+    \end{center}
     \label{fig:phong_normal_sphere}
 \end{figure}
 
-\begin{figure}
-    \centering
+Figure \ref{fig:scene_1} shows multiple objects using different materials, instanced in the same scene. Each material defines its own parameters.
+
+\begin{figure}[ht]
     \caption{Multiple objects with different materials}
-    \includegraphics[width = 13cm]{"results/meshes-multi-material"}
+    \begin{center}
+        \includegraphics[width = 13cm]{"results/meshes-multi-material"}
+    \end{center}
     \label{fig:scene_1}
 \end{figure}
 
+Figure \ref{fig:scene_2} shows a scene with a variety of objects. The sky is rendered by applying a texture to a capsule. The ground, sphere and torus have normal mapping applied (most visible in figures \ref{fig:torus_closeup} and \ref{fig:sphere_closeup}) and the dragon uses Phong shading (figure \ref{fig:dragon_closeup}).
+
 \begin{figure}
-    \centering
     \caption{An example scene}
-    \includegraphics[width = 15cm]{"results/scene"}
+    \begin{center}
+        \includegraphics[width = 15cm]{"results/scene"}
+    \end{center}
     \label{fig:scene_2}
 \end{figure}
 
 \begin{figure}
-    \centering
     \caption{Dragon closeup}
-    \includegraphics[width = 15cm]{"results/dragon-closeup"}
+    \begin{center}
+        \includegraphics[width = 15cm]{"results/dragon-closeup"}
+    \end{center}
     \label{fig:dragon_closeup}
 \end{figure}
 
 \begin{figure}
-    \centering
     \caption{Torus closeup}
-    \includegraphics[width = 15cm]{"results/torus-closeup"}
+    \begin{center}
+        \includegraphics[width = 15cm]{"results/torus-closeup"}
+    \end{center}
     \label{fig:torus_closeup}
 \end{figure}
 
 \begin{figure}
-    \centering
     \caption{Sphere closeup}
-    \includegraphics[width = 15cm]{"results/sphere-closeup"}
+    \begin{center}
+        \includegraphics[width = 15cm]{"results/sphere-closeup"}
+    \end{center}
     \label{fig:sphere_closeup}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width = 15cm]{"results/room"}
+Figure \ref{fig:room_floor} shows a scene rendered with an illumination model which accounts for distance from the light source, creating a more realistic effect.
+
+\begin{figure}[ht]
     \caption{Floor illuminated with Phong and attenuation based on distance}
+    \begin{center}
+        \includegraphics[width = 15cm]{"results/room"}
+    \end{center}
     \label{fig:room_floor}
 \end{figure}
