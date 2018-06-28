@@ -2,10 +2,76 @@
 
 \chapter{Background}
 
-\textcolor{red}{As duas proximas secoes devem ser convertidas em um glossario. Inicie esta secao fazendo uma breve apresentacao sobre o pipeline grafico, ate que voce chegue ao conceito de shaders. Depois inclua uma secao explicando o que sao shaders. Depois disso, voce apresentara a secao sobre Vulcan. Note que esta eh uma secao de background para os dois temas centrais do trabalho: shader programming e Vulkan.} 
+%\textcolor{red}{As duas proximas secoes devem ser convertidas em um glossario. Inicie esta secao fazendo uma breve apresentacao sobre o pipeline grafico, ate que voce chegue ao conceito de shaders. Depois inclua uma secao explicando o que sao shaders. Depois disso, voce apresentara a secao sobre Vulcan. Note que esta eh uma secao de background para os dois temas centrais do trabalho: shader programming e Vulkan.}
 
-\input{concepts/rendering.tex}
+In this chapter, we will introduce important concepts of computer graphics which the reader is expected to be familiar with. Concepts from linear algebra like vector maths, matrix operations and geometric transformations are presumed to be understood.
 
-\input{concepts/shading.tex}
+\section{Graphics pipeline}
+In the field of computer graphics, \textbf{graphics pipeline} is the name of the algorithm used to generate 2D images out of 3D geometric information. Figure \ref{fig:graphics_pipeline} shows a diagram describing the stages of the graphics pipeline. Each stage of the pipeline is responsible for a specific operation; the output of each stage is passed to the next stage to be used as input.
+
+The function performed by each of the stages in the pipeline are described as follows \cite{vulkan_tutorial}:
+
+\begin{itemize}
+    \item Input assembler: Collects the raw vertex data from the vertex buffer and may also use an index buffer to repeat certain elements without having to duplicate the vertex data itself;
+    \item Vertex shader: Executed for every vertex in the object, generally applies transformations to turn vertex positions from model space to screen space;
+    \item Tesselation: Optional stage which subdivides geometry based on certain rules to increase mesh quality;
+    \item Geometry shader: Optional stage executed for every primitive (point, line, triangle) which is able to discard or create new primitives;
+    \item Rasterization: Breaks down the primitives into fragments, which are the pixel elements that will make up the rendered image. Fragments located outside the screen space are discarded, and vertex data is interpolated across the fragments;
+    \item Fragment shader: Invoked for every fragment, determines its color based on the interpolated vertex data outputted by the raterization stage;
+    \item Color blending: Applies operations to mix different fragments that map to the same pixel in the resulting image, usually based upon transparency.
+\end{itemize}
+
+\begin{figure}[h]
+    \caption{Graphics pipeline}
+    \begin{center}
+        \includegraphics[width = 7cm]{"vulkan_pipeline"}
+    \end{center}
+    \label{fig:graphics_pipeline}
+    \legend{Source: \cite{vulkan_tutorial}}
+\end{figure}
+
+Certain stages can only be controlled by changing their parameters, but the function performed is always the same. These are known as \textit{fixed function stages} and are the ones in green in Figure \ref{fig:graphics_pipeline}.
+
+The other stages, in orange, are known as the \textit{programmable stages}, which means developers can upload source code to the graphics card to apply exactly the operations they intended for that stage.
+
+From the programmable stages, tesselation shaders and geometry shaders are optional, meaning that their functions can be skipped and the pipeline can still work properly. On the other hand, the \textit{vertex shader} and the \textit{fragment shader} are required from the developer and the graphics pipeline cannot function without them.
+
+Shaders always receive data from the previous stage of the pipeline, but they can also define additional parameters to be used in their computations. These parameters are called \textit{uniform variables}. Uniform variables can have their values changed from one frame to the next, but for every time the shader is executed in a frame, the uniform variable will have the exact same value. These variables can be used to, for example, tell the shader where the lights are located in the scene, or provide an image to be used as texture. These values must be supplied from the host application, which manages the graphics pipeline.
+
+The following code represents the basic operation of a vertex shader:
+
+\begin{verbatim}
+    uniform mat4 modelViewProjection;
+    in vec4 position;
+    out vec4 clip_position;
+    void main() {
+        clip_position = modelViewProjection * position;
+    }
+\end{verbatim}
+
+The first line defines a uniform variable which is a matrix that will transform vertices from local space to clipping space (a normalized space required by the next stages of the pipeline). This matrix accumulates model, view and the projection matrices. The model matrix applies rotation, scale and translation to the object's vertices, transforming them from local space to world space. The view matrix transforms the vertex positions from world space to view space, where the camera is at the origin. Finally, the projection matrix will deform the geometry to apply perspective or orthogonal projections.
+
+The second line describes the vertex attribute that the vertex shader expects to receive from the input assembler. This simple example expects just the vertex position, but it could require other attributes, such as normal vectors or texture coordinates.
+
+The third line describes the output of this shader. Since it is a vertex shader, the vertex position in clip space is required to be an output. Other output variables can be defined, and these variables will be interpolated by the rasterizer and delivered to the fragment shader.
+
+The following code represents the basic operation of a fragment shader:
+
+\begin{verbatim}
+    uniform vec4 frag_color;
+    out vec4 final_color;
+    void main() {
+        final_color = frag_color;
+    }
+\end{verbatim}
+
+The purpose of the fragment shader is to output the color of the fragment. This sample code does just that: a uniform variable is used as color for the fragment. The \texttt{vec4} variable type can be used to represent colors because it holds four floating point values, which are interpreted as red, green, blue and alpha channels.
+
+\section{Graphics APIs}
+As we have mentioned, graphics applications require a host application to manage its operation. The means used to do that is through a graphics API. Graphics APIs are a set of routines implemented by graphics cards manufacturers that allows developers to control the hardware. Examples of graphics APIs include Direct3D, OpenGL, Metal and Vulkan. Each API defines their own set of methods and how they are used, and it is up for hardware manufacturers to support the APIs. Some APIs, such as Direct3D and Metal, are proprietary to enterprises (namely, Microsoft and Apple, respectively) and can only be used on their platforms. Others, like OpenGL and Vulkan, are open standards, both provided by the Khronos group, an industry consortium. This work uses the Vulkan API to fulfill a personal goal of creating a functional piece of software using this relatively new API.
 
 \input{concepts/vulkan.tex}
+
+% WILL GO TO A "GLOSSARY" OF SORTS
+%\input{concepts/rendering.tex}
+%\input{concepts/shading.tex}

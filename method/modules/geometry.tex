@@ -1,11 +1,9 @@
 \subsection{Geometry Module}
 The geometry module represents an object in the scene. It holds all the vertices attributes (vertex position, normal, tangent, texture coordinates and indices, if available); a transformation, which defines the rotation, scale and translation applied to the object; and a reference to a material object which will be used to render the geometry in the scene.
 
-\subsubsection{Vertex, Index and Uniform Buffers}
-When an object is added to the scene, it must be filled with vertex data and then a material has to be assigned to the material. Then, the object will get a list of the required vertex attributes from the material, and create the vertex buffer accordingly. If the vertex attributes include index data, the index buffer is created, too. Then, the uniform buffers are created, based on the uniform buffer objects in the material assigned.
+When an object is added to the scene, it must be filled with vertex data and then a material has to be assigned to the object. Then, the object will get a list of the required vertex attributes from the material, and create the vertex buffer accordingly. If the vertex attributes include index data, the index buffer is created, too. Then, the uniform buffers are created, based on the uniform buffer objects in the material assigned.
 
-\subsubsection{Descriptor Sets}
-For the uniform buffer to be passed to the shaders, we need to allocate a descriptor set from the pool defined in the material assigned to this geometry. We need to do this because the descriptor layout in the material is just a description of what types of descriptors can be bound, but no uniform buffer has been referenced yet. The descriptor set specifies a buffer to be bound in the uniform buffer descriptor.
+For the uniform buffer to be passed to the shaders, we need to allocate a descriptor set from the pool defined in the material assigned to the geometry.
 
 \subsubsection{Recording Drawing Commands}
 Since all drawing operations are recorded in advance in Vulkan, this module also provides a method for recording the drawing commands in a command buffer previously initialized.

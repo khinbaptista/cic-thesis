@@ -7,6 +7,7 @@ In this section we will describe how our application works from a user perspecti
         \includegraphics[width = 15cm]{"editor/window"}
     \end{center}
     \label{fig:window}
+    \legend{Source: the author}
 \end{figure}
 
 
@@ -22,6 +23,7 @@ The create button (labeled with a plus sign) allows the user to load shaders and
         \includegraphics[width = 10cm]{"editor/create-material"}
     \end{center}
     \label{fig:create-material}
+    \legend{Source: the author}
 \end{figure}
 
 The material name must be unique and the vertex and fragment shaders source files must have a ".vert" and ".frag" extension, respectively.
@@ -34,6 +36,7 @@ When the material is created, the contents of the shader files will be loaded in
         \includegraphics[width = 10cm]{"editor/shader-editor"}
     \end{center}
     \label{fig:shader-editor}
+    \legend{Source: the author}
 \end{figure}
 
 The GLSL source code for the vertex and fragment shaders can be altered in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
@@ -46,6 +49,7 @@ In order to compile the shaders and setup the material, the user can click on th
         \includegraphics[width = 10cm]{"editor/uniform-editor"}
     \end{center}
     \label{fig:uniform-editor}
+    \legend{Source: the author}
 \end{figure}
 
 The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are described in table \ref{tab:uniform_types}.
@@ -85,6 +89,7 @@ Newly created objects will be given a name based on their shape (if the object i
         \includegraphics[width = 14cm]{"editor/default_material"}
     \end{center}
     \label{fig:default_material}
+    \legend{Source: the author}
 \end{figure}
 
 When an object is selected, their transformation and currently assigned material are displayed on the inspector panel, below the material parameters panel (Figures \ref{fig:uniform-editor} and \ref{fig:inspector}). Changes made to the inspector and the material parameters will take effect immediately.
@@ -95,6 +100,7 @@ When an object is selected, their transformation and currently assigned material
         \includegraphics[width = 10cm]{"editor/inspector"}
     \end{center}
     \label{fig:inspector}
+    \legend{Source: the author}
 \end{figure}
 
 \begin{figure}
@@ -103,6 +109,7 @@ When an object is selected, their transformation and currently assigned material
         \includegraphics[width = 6cm]{"editor/material_selection"}
     \end{center}
     \label{fig:material_selection}
+    \legend{Source: the author}
 \end{figure}
 
 \subsection{Navigation}
