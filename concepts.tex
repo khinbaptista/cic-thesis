@@ -1,10 +1,23 @@
-\textcolor{red}{Antes da secao de Background voce deve apresentar uma secao de trabalhos relacionados (Related Work).}
-
 \chapter{Background}
 
 %\textcolor{red}{As duas proximas secoes devem ser convertidas em um glossario. Inicie esta secao fazendo uma breve apresentacao sobre o pipeline grafico, ate que voce chegue ao conceito de shaders. Depois inclua uma secao explicando o que sao shaders. Depois disso, voce apresentara a secao sobre Vulcan. Note que esta eh uma secao de background para os dois temas centrais do trabalho: shader programming e Vulkan.}
 
-In this chapter, we will introduce important concepts of computer graphics which the reader is expected to be familiar with. Concepts from linear algebra like vector maths, matrix operations and geometric transformations are presumed to be understood.
+In this chapter, we will introduce the reader to Godot, the tool used to create our application, and to important concepts of computer graphics required for the complete understanding of this thesis. Concepts from linear algebra like vector maths, matrix operations and geometric transformations are presumed to be known.
+
+\section{Godot Engine}
+Godot Engine is a 2D and 3D game engine, free and open source under the MIT license. It provides a set of common tools for game development, including many GUI widgets, like buttons, menus, panels and text editors, which is exactly what we needed to build the control window of our application in a way that is very easy to use and to script, while being able to deploy to different platforms.
+
+\subsection{GDNative}
+GDNative is a module of Godot Engine which adds a new "scripting language" to it \cite{gdnative_post}. In reality, it is not a language, but a precompiled dynamic library that will be loaded into the Godot application. GDNative allows developers to access the Godot API and create scripts using different languages, for example C and C++,  and use these scripts inside Godot as if they were scripts native to the engine.
+
+There are two big use cases for GDNative:
+
+\begin{itemize}
+    \item To allow developers to write \textbf{performance critical code} in more efficient languages than GDScript (the scripting language used by Godot Engine). GDScript is a good scripting language, but it was not built for performance. An example task that fits this scenario is generating terrain procedurally.
+    \item To allow developers to \textbf{bring third-party code to Godot}. This is useful in game development in general to integrate useful libraries like Steamworks and Google Play Services. In our case, we used it to bring Vulkan code into the application.
+\end{itemize}
+
+GDNative is provided as a C API. In order to use other languages, bindings to the original API must be created.
 
 \section{Graphics pipeline}
 In the field of computer graphics, \textbf{graphics pipeline} is the name of the algorithm used to generate 2D images out of 3D geometric information. Figure \ref{fig:graphics_pipeline} shows a diagram describing the stages of the graphics pipeline. Each stage of the pipeline is responsible for a specific operation; the output of each stage is passed to the next stage to be used as input.

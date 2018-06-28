@@ -2,24 +2,16 @@
 
 Shader programming is an essential part of modern computer graphics. However, in order to write her/his first shader program, one is often faced with the need to write an entire host application that will supply data for the shader. This includes establishing associations between variables from the host program and from the shader, loading polygonal models, setting parameters, initializing textures, etc.  
 All this can be quite discouraging for a novice, deviating one's attention from actual shader programming to the development of application infrastructure.
-%
-%
-%%Computer graphics is an important subject in any computer science degree. It is a very useful tool for many other areas, such as artificial intelligence, robotics and simulations, as well as for the industry, most notably cinema and video games.
-%%
-%%Such an important subject, however, may easily overwhelm novices, requiring them to understand so much of the theoretical concepts before even having the first contact with practical computer graphics and the results that can be achieved.
-%
-To make it easier for newcomers, we have built an application that provides a complete environment for shader programming. With this tool, one will be able to write shaders without having to worry about such infrastructure details. By being able to focus on the shaders themselves and get results faster, we hope to encourage more students to learn computer graphics.
-Developing such a tool also had another important personal goal: serve as an opportunity for learning Vulkan, a modern graphics API.
 
-\textcolor{red}{Em um ou mais paragrafos, apresente uma visao geral do trabalho. Considere aspectos associados aos dois objetivos: prover a ferramenta de aprendizagem e aprender Vulkan.}
+To make it easier for newcomers, we have built an application that provides a complete environment for shader programming. With this tool, one will be able to write shaders without having to worry about such infrastructure details. By being able to focus on the shaders themselves and get results faster, we hope to encourage more students to learn computer graphics. Developing such a tool also had another important personal goal: serve as an opportunity for learning Vulkan, a modern graphics API.
 
-\textcolor{red}{Neste paragrafo, apresente a estrutura do texto: This thesis is organized as follows: Chapter 2 presents ...., Chapter 3 ... and so on.}
+Our application allows students to easily prototype shaders using an integrated source code editor, and to view the results in real time in the visualization window, which can include any objects the user wants to add, including custom meshes that can be imported. While implementing this tool, we were able to understand the inner workings of Vulkan, an API which is growing fast and becoming more present in the industry of computer graphics.
 
-% CG is important, vast area of knowledge
-% Good visual feedback by nature, can be used to teach other subjects (physics?)
-% important for simulations
-% Difficult to debug
+This thesis is organized as follows: Chapter 2 presents the reader with a base knowledge about computer graphics and how the modern graphics applications perform their functions, as well as introduces Godot Engine, the tool used to create our application. Chapter 3 introduces important details of the Vulkan API and how it differs from OpenGL. Chapter 4 describes the methods applied in the implementation of our tool, the architecture of our application and how to use it from a user perspective. Chapter 5 presents the results we were able to obtain using our solution. Chapter 6 concludes this work, presenting our view of the tool developed. Chapter 7 discusses how our application could be improved in the future.
 
-% https://en.wikipedia.org/wiki/Visual_learning
-% https://files.eric.ed.gov/fulltext/EJ1079541.pdf
-% http://psycnet.apa.org/fulltext/2003-09576-015.html
+\section{Related work}
+As we mentioned, many attempts were made to create a proper development environment for shaders.
+
+\textbf{FX Composer}, developed by NVidia, featured an integrated source code editor, a scene visualizer which could use DirectX 10, DirectX 9 or OpenGL, widgets for editing parameters, particle systems, material manager, material preview and much more \cite{fxcomposer}. My personal experience with FX Composer confirms the software has not been updated since 2008 \cite{fxcomposer_release_notes}: many usability issues and bugs were encountered while in class, which in part motivated me to create this work.
+
+\textbf{RenderMonkey}, developed by AMD, aimed to provide tools for both programmers and artists. It featured a complete shader source editor and preview window, but also a workspace specific for artists, where much of the shader programming was hidden from the user, widgets used to adjust parameter values. It presented support for HLSL, GLSL and GLES shading languages \cite{rendermonkey}. Although I personally have never used it, the latest version of the software was released in 2008 \cite{rendermonkey_release_notes} and AMD's website no longer displays any information about the software or that it ever existed.
