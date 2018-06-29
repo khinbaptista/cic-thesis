@@ -5,7 +5,7 @@
 In this chapter, we will introduce the reader to Godot, the tool used to create our application, and to important concepts of computer graphics required for the complete understanding of this thesis. Concepts from linear algebra like vector maths, matrix operations and geometric transformations are presumed to be known.
 
 \section{Godot Engine}
-Godot Engine is a 2D and 3D game engine, free and open source under the MIT license. It provides a set of common tools for game development, including many GUI widgets, like buttons, menus, panels and text editors, which is exactly what we needed to build the control window of our application in a way that is very easy to use and to script, while being able to deploy to different platforms.
+Godot Engine is a 2D and 3D game engine, free and open source under the MIT license. It provides a set of common tools for game development, including many GUI widgets, like buttons, menus, panels and text editors, which is exactly what we needed to build the control window of our application in a way that is very easy to use and to script, while being able to deploy to different platforms. The engine uses its own programming language for scripts, called GDScript, which is similar to Python.
 
 \subsection{GDNative}
 GDNative is a module of Godot Engine which adds a new "scripting language" to it \cite{gdnative_post}. In reality, it is not a language, but a precompiled dynamic library that will be loaded into the Godot application. GDNative allows developers to access the Godot API and create scripts using different languages, for example C and C++,  and use these scripts inside Godot as if they were scripts native to the engine.
@@ -20,7 +20,7 @@ There are two big use cases for GDNative:
 GDNative is provided as a C API. In order to use other languages, bindings to the original API must be created.
 
 \section{Graphics pipeline}
-In the field of computer graphics, \textbf{graphics pipeline} is the name of the algorithm used to generate 2D images out of 3D geometric information. Figure \ref{fig:graphics_pipeline} shows a diagram describing the stages of the graphics pipeline. Each stage of the pipeline is responsible for a specific operation; the output of each stage is passed to the next stage to be used as input.
+In the field of computer graphics, \textbf{graphics pipeline} is the name of the algorithm used to generate 2D images out of 3D geometric information \cite{shirley_fcg:2002}. Figure \ref{fig:graphics_pipeline} shows a diagram describing the stages of the graphics pipeline. Each stage of the pipeline is responsible for a specific operation; the output of each stage is passed to the next stage to be used as input.
 
 The function performed by each of the stages in the pipeline are described as follows \cite{vulkan_tutorial}:
 
@@ -81,7 +81,7 @@ The following code represents the basic operation of a fragment shader:
 The purpose of the fragment shader is to output the color of the fragment. This sample code does just that: a uniform variable is used as color for the fragment. The \texttt{vec4} variable type can be used to represent colors because it holds four floating point values, which are interpreted as red, green, blue and alpha channels.
 
 \section{Graphics APIs}
-As we have mentioned, graphics applications require a host application to manage its operation. The means used to do that is through a graphics API. Graphics APIs are a set of routines implemented by graphics cards manufacturers that allows developers to control the hardware. Examples of graphics APIs include Direct3D, OpenGL, Metal and Vulkan. Each API defines their own set of methods and how they are used, and it is up for hardware manufacturers to support the APIs. Some APIs, such as Direct3D and Metal, are proprietary to enterprises (namely, Microsoft and Apple, respectively) and can only be used on their platforms. Others, like OpenGL and Vulkan, are open standards, both provided by the Khronos group, an industry consortium. This work uses the Vulkan API to fulfill a personal goal of creating a functional piece of software using this relatively new API.
+As we have mentioned, graphics applications require a host application to manage its operation. The means used to do that is through a graphics API. Graphics APIs are a set of routines implemented by graphics cards manufacturers that allows developers to control the hardware. Examples of graphics APIs include Direct3D, OpenGL, Metal and Vulkan. Each API defines their own set of methods and how they are used, and it is up for hardware manufacturers to support the APIs. Some APIs, such as Direct3D and Metal, are proprietary to enterprises (namely, Microsoft and Apple, respectively) and can only be used on their platforms. Others, like OpenGL and Vulkan, are open standards, both provided by the Khronos group, an industry consortium. This work uses the Vulkan API to fulfill a personal goal of creating a functional piece of software using this relatively new technology, released in 2016.
 
 \input{concepts/vulkan.tex}
 

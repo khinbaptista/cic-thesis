@@ -28,7 +28,7 @@ The create button (labeled with a plus sign) allows the user to load shaders and
 
 The material name must be unique and the vertex and fragment shaders source files must have a ".vert" and ".frag" extension, respectively.
 
-When the material is created, the contents of the shader files will be loaded in the shader editor (Figure \ref{fig:shader-editor}). At this point, the material is not ready for usage yet.
+When the material is created, the contents of the shader files are loaded in the shader editor (Figure \ref{fig:shader-editor}). At this point, the material is not ready for usage yet.
 
 \begin{figure}
     \caption{Shader editor}
@@ -41,7 +41,7 @@ When the material is created, the contents of the shader files will be loaded in
 
 The GLSL source code for the vertex and fragment shaders can be altered in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
 
-In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders will be compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, will display the error messages. When the compilation succeeds, the uniforms defined in the shaders' source code will be exposed in the material parameters panel (Figure \ref{fig:uniform-editor}).
+In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders are then compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, displays the error messages. When the compilation succeeds, the uniforms defined in the shaders' source code are exposed in the material parameters panel (Figure \ref{fig:uniform-editor}).
 
 \begin{figure}
     \caption{Uniform editor}
@@ -52,7 +52,7 @@ In order to compile the shaders and setup the material, the user can click on th
     \legend{Source: the author}
 \end{figure}
 
-The editor will create appropriate widgets for each uniform defined in the shaders based on their types. Supported types are described in table \ref{tab:uniform_types}.
+The editor creates appropriate widgets for each uniform variable defined in the shaders based on their types. Supported types are described in table \ref{tab:uniform_types}.
 
 \begin{table}
     \centering
@@ -81,7 +81,7 @@ The editor will create appropriate widgets for each uniform defined in the shade
 
 The plus button on the objects panel allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format). The geometry primitives provided are: capsule, cube, cylinder, plane, prism and sphere.
 
-Newly created objects will be given a name based on their shape (if the object is a primitive) or their file name (if it was created from a mesh file), and their creation order. New objects will be assigned the default material upon creation, and will instantly appear in the in the scene (figure \ref{fig:default_material}).
+Newly created objects are given a name based on their shape (if the object is a primitive) or their file name (if it was created from a mesh file), and their creation order. New objects are assigned the default material upon creation, and instantly appear in the scene (figure \ref{fig:default_material}).
 
 \begin{figure}
     \caption{Dragon mesh with the default material}
@@ -92,7 +92,7 @@ Newly created objects will be given a name based on their shape (if the object i
     \legend{Source: the author}
 \end{figure}
 
-When an object is selected, their transformation and currently assigned material are displayed on the inspector panel, below the material parameters panel (Figures \ref{fig:uniform-editor} and \ref{fig:inspector}). Changes made to the inspector and the material parameters will take effect immediately.
+When an object is selected, their transformation and currently assigned material are displayed on the inspector panel, below the material parameters panel (Figures \ref{fig:uniform-editor} and \ref{fig:inspector}). Changes made to the inspector and the material parameters take effect immediately.
 
 \begin{figure}
     \caption{Inspector}
