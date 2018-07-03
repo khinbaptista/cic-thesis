@@ -1,5 +1,5 @@
 \section{Architecture}
-In this work, the most important decision of the architecture was the choice of using Vulkan for the graphics API. Using Vulkan has been a learning process, and the architecture chosen is a reflection of it.
+In this work, the most important decision of the architecture was the choice of using Vulkan for the graphics API. Using Vulkan has been a learning process, and the architecture chosen reflects it.
 
 In order to have our Vulkan code respond to changes in the control window, some of the classes in our architecture are exposed to GDScript via GDNative. GDNative requires the developer to register each method and property that will be made available for engine scripts to call, which allows our application to provide a minimal interface, keeping the implementation encapsulated, separated from the GUI in the control window.
 
