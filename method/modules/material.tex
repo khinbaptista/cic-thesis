@@ -4,7 +4,7 @@ A Material is a combination of a vertex and a fragment shader, plus the values o
 \subsubsection{Shader Parsing}
 The shaders added to the material will have their SPIR-V code parsed by the \emph{SPIRV Cross} library. Our application will use this data to load the appropriate vertex attributes, uniform objects and sampler objects used by the shaders.
 
-Shaders define which vertex attributes will be used as input, and uniform variables can serve as parameters for the material. All vertex attributes must be recognized by the application, following the defined names and types defined in table \ref{tab:vertex_attributes}. The user can also query the application for certain uniform variables, following the names and types defined in Table \ref{tab:uniform_variables}.
+Shaders define which vertex attributes will be used as input, and uniform variables can serve as parameters for the material. All vertex attributes must be recognized by our application, following the defined names and types defined in table \ref{tab:vertex_attributes}. The user can also query the application for certain uniform variables, following the names and types defined in Table \ref{tab:uniform_variables}.
 
 \begin{table}[h]
     \centering
@@ -47,6 +47,8 @@ If the \texttt{position} attribute is a vec4, the fourth component will be set t
     \end{tabular}
     \label{tab:uniform_variables}
 \end{table}
+
+Note that the normal matrix is a 3x3 matrix, unlike the other ones. This is because the correct matrix to transform the normal vector is the transpose of the inverse of the 3x3 submatrix from the model view matrix \cite{normal_matrix}.
 
 The shader code can also define arbitrary uniform variables, which will be initialized to a default value and exposed in the control window so the user can change the values manually. Numeric values are initialized to 1 to avoid division by zero. Image samplers defined in code will be initialized to a white texture.
 

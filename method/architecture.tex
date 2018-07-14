@@ -3,7 +3,7 @@ In this work, the most important decision of the architecture was the choice of 
 
 In order to have our Vulkan code respond to changes in the control window, some of the classes in our architecture are exposed to GDScript via GDNative. GDNative requires the developer to register each method and property that will be made available for engine scripts to call, which allows our application to provide a minimal interface, keeping the implementation encapsulated, separated from the GUI in the control window.
 
-Since GDNative loads a precompiled dynamic library, it is required for the developer to provide the library for the platforms to which the project is to be deployed. The development of our application was completely done in Linux, and thus it is the only platform the library has been compiled into, but our code does not rely on any platform-dependent libraries, so compiling to Windows or MacOS should be easy.
+Since GDNative loads a precompiled dynamic library, it is required for the developer to provide the library for the platforms to which the project is to be deployed. The development of our application was completely done in Linux, and thus it is the only platform the library has been compiled into, but our code does not rely on any platform-dependent libraries, so compiling to Windows or MacOS should be straightforward.
 
 \input{method/modules/vkapp.tex}
 

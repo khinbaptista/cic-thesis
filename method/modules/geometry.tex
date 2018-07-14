@@ -18,6 +18,6 @@ Since all drawing operations are recorded in advance in Vulkan, this module also
 \end{itemize}
 
 \subsubsection{Updating Uniform Buffers}
-The function to update uniform buffers is called by the Vulkan application module, and expects a structures containing certain uniform values that are not dependent on the object, such as the camera's view and projection matrices. The other matrices are calculated and loaded into the appropriate buffers.
+The function to update uniform buffers is called by the Vulkan application module, and expects a structure containing certain uniform values that are not dependent on the object, such as the camera's view and projection matrices. The other matrices are calculated and loaded into the appropriate buffers.
 
 The material can define arbitrary uniform variables, and those must be updated as well. The material holds an array of dictionaries that describe each of the user-defined variables, their types, sizes, bindings, offsets and values. With this information, our application is able to load the variable value into the correct buffer in the correct offset.

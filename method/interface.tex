@@ -37,7 +37,7 @@ The \textit{create button} (labeled with a plus sign) allows the user to load sh
 
 The GLSL source code for the vertex and fragment shaders can be altered in the shader editor, which features syntax highlighting, line numbers, highlight selected word occurrences and a shader compilation status bar.
 
-In order to compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders are then compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, displays the error messages. When the compilation succeeds, the uniforms defined in the shaders' source code are exposed in the material parameters panel (Figure \ref{fig:uniform-editor}).
+To compile the shaders and setup the material, the user can click on the execute button in the material list panel (the button with the "play" icon). The shaders are then compiled and loaded in the material. If the compilation is unsuccessful, the status bar, right under the fragment shader editor, displays the error messages. When the compilation succeeds, the uniform variables defined in the shaders' source code are exposed in the material parameters panel (Figure \ref{fig:uniform-editor}).
 
 \begin{figure}
     \caption{Uniform editor}
@@ -75,7 +75,7 @@ The editor creates appropriate widgets for each uniform variable defined in the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Objects}
 
-The plus button on the objects panel allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format). The geometry primitives provided are: capsule, cube, cylinder, plane, prism and sphere.
+The plus button on the objects panel allows the user to create a new object, selecting a primitive geometry from a list or loading a custom mesh file (in Wavefront ".obj" format). If the file defines multiple groups inside the object, the groups will be merged and loaded as a single group. The geometry primitives provided are: capsule, cube, cylinder, plane, prism and sphere.
 
 Newly created objects are given a name based on their shape (if the object is a primitive) or their file name (if it was created from a mesh file), and their creation order. New objects are assigned the default material upon creation, and instantly appear in the scene (Figure \ref{fig:default_material}).
 
