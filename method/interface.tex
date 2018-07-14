@@ -2,7 +2,7 @@
 In this section we will describe how our application works from a user perspective, explaining the different panels, their responsibilities and how to use them.
 
 \begin{figure}[ht]
-    \caption{Application control window}
+    \caption{Shader Tutor control window}
     \begin{center}
         \includegraphics[width = 15cm]{"editor/window"}
     \end{center}
@@ -10,6 +10,34 @@ In this section we will describe how our application works from a user perspecti
     \legend{Source: the author}
 \end{figure}
 
+\begin{figure}[ht]
+    \caption{Panels of the control window}
+    \begin{center}
+        \includegraphics[width = 15cm]{"editor/ShaderTutorInterfaceBreakdown"}
+    \end{center}
+    \label{fig:interface_breakdown}
+    \legend{Source: the author}
+\end{figure}
+
+Figure \ref{fig:interface_breakdown} shows the different panels of Shader Tutor:
+\begin{enumerate}
+    \item \textbf{Material list}: Lists all the materials loaded. Allows the user to load shaders and compile them, which will prepare the material to be used in the scene;
+    \item \textbf{Shader editor}: Source code editor featuring GLSL syntax highlighting, line numbers and other useful features. Also contains a multiline shader compilation status bar to display any errors in the shader code found during compilation;
+    \item \textbf{Uniform variables editor}: Uniform variables defined in shader code will be displayed in this panel as widgets which allow the user to change the values of the variables. The changes are applied instantly in the visualization window;
+    \item \textbf{Object list}: List of the objects in the scene. Allows the user to create new objects, either from primitives (capsule, cube, cylinder, plane, prism or sphere) or loaded from a file;
+    \item \textbf{Inspector}: Displays the transformation applied to the selected object in the object list (translation, rotation and scale) and the material used to display it.
+\end{enumerate}
+
+Figure \ref{fig:visualization_window} shows that the visualization window, which displays the scene, is a different window from the control window described above.
+
+\begin{figure}[ht]
+    \caption{Visualization and control windows}
+    \begin{center}
+        \includegraphics[width = 15cm]{"editor/visualization_window"}
+    \end{center}
+    \label{fig:visualization_window}
+    \legend{Source: the author}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Materials and Shaders}

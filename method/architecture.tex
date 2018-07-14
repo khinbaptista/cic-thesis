@@ -5,6 +5,17 @@ In order to have our Vulkan code respond to changes in the control window, some 
 
 Since GDNative loads a precompiled dynamic library, it is required for the developer to provide the library for the platforms to which the project is to be deployed. The development of our application was completely done in Linux, and thus it is the only platform the library has been compiled into, but our code does not rely on any platform-dependent libraries, so compiling to Windows or MacOS should be straightforward.
 
+The architecture of Shader Tutor is depicted in Figure \ref{fig:architecture}. The purpose of each module is described in the following sections.
+
+\begin{figure}[h]
+    \caption{Shader Tutor architecture}
+    \begin{center}
+        \includegraphics[width = 15cm]{figs/ShaderTutorArchitecture.png}
+    \end{center}
+    \legend{Source: the author}
+    \label{fig:architecture}
+\end{figure}
+
 \input{method/modules/vkapp.tex}
 
 \input{method/modules/shader.tex}
